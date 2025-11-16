@@ -300,6 +300,11 @@
       border-radius: 12px;
       padding: 12px 16px;
       box-shadow: var(--shadow-1);
+      transition: background-color 200ms ease;
+    }
+
+    .date-section:not(.collapsed) {
+      background: linear-gradient(to bottom, rgba(61, 182, 206, 0.03) 0%, rgba(61, 182, 206, 0.01) 100%);
     }
 
     .date-section .date-header {
@@ -378,8 +383,8 @@
     }
 
     .indicator-dot {
-      width: 8px;
-      height: 8px;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
       flex-shrink: 0;
     }
@@ -388,20 +393,45 @@
       background: #2A8A9E;
     }
 
+    .indicator-dot.tasks.unfilled {
+      background: transparent;
+      border: 2px solid #2A8A9E;
+    }
+
     .indicator-dot.weigh {
       background: #BD9B00;
+    }
+
+    .indicator-dot.weigh.unfilled {
+      background: transparent;
+      border: 2px solid #BD9B00;
     }
 
     .indicator-dot.labs {
       background: #E8538B;
     }
 
+    .indicator-dot.labs.unfilled {
+      background: transparent;
+      border: 2px solid #E8538B;
+    }
+
     .indicator-dot.coaching {
       background: #6F4A80;
     }
 
+    .indicator-dot.coaching.unfilled {
+      background: transparent;
+      border: 2px solid #6F4A80;
+    }
+
     .indicator-dot.note {
       background: #D77A0F;
+    }
+
+    .indicator-dot.note.unfilled {
+      background: transparent;
+      border: 2px solid #D77A0F;
     }
 
     /* Simplified task card - unified for all types */
@@ -1102,6 +1132,60 @@
       }
     }
 
+    /* Coming Soon Modal */
+    .coming-soon-modal {
+      background: white;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 320px;
+      margin: auto;
+      padding: 32px 24px;
+      text-align: center;
+      animation: slideIn 300ms ease;
+    }
+
+    .coming-soon-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .coming-soon-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--color-charcoal);
+      margin-bottom: 8px;
+    }
+
+    .coming-soon-text {
+      font-size: 15px;
+      color: var(--color-gray-medium);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .coming-soon-button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      background: var(--color-turquoise);
+      color: white;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .coming-soon-button:active {
+      background: var(--color-turquoise-dark);
+      transform: scale(0.98);
+    }
+
+    .modal-overlay.center {
+      align-items: center;
+      justify-content: center;
+    }
+
     @keyframes slideIn {
       from {
         transform: translateY(20px);
@@ -1197,7 +1281,7 @@
     <!-- Calendar List -->
     <div class="calendar-list" id="calendarList">
       <!-- Today Section -->
-      <div class="date-section">
+      <div class="date-section collapsed">
         <div class="date-header" onclick="toggleDateSection(this)">
           <div class="date-header-left">
             <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1207,7 +1291,7 @@
           </div>
           <div class="date-indicators">
             <div class="indicator-dot tasks"></div>
-            <div class="indicator-dot weigh" title="Weigh-in day"></div>
+            <div class="indicator-dot weigh unfilled" title="Weigh-in day"></div>
           </div>
         </div>
 
@@ -1286,7 +1370,7 @@
             <div class="date-label">Monday, Nov 17</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot tasks unfilled"></div>
           </div>
         </div>
 
@@ -1324,8 +1408,8 @@
             <div class="date-label">Tuesday, Nov 18</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
-            <div class="indicator-dot note"></div>
+            <div class="indicator-dot tasks unfilled"></div>
+            <div class="indicator-dot note unfilled"></div>
           </div>
         </div>
 
@@ -1363,7 +1447,7 @@
             <div class="date-label">Wednesday, Nov 19</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot tasks unfilled"></div>
           </div>
         </div>
 
@@ -1401,7 +1485,7 @@
             <div class="date-label">Thursday, Nov 20</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot tasks unfilled"></div>
           </div>
         </div>
 
@@ -1439,7 +1523,7 @@
             <div class="date-label">Friday, Nov 21</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot tasks unfilled"></div>
           </div>
         </div>
 
@@ -1477,7 +1561,7 @@
             <div class="date-label">Saturday, Nov 22</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot tasks unfilled"></div>
           </div>
         </div>
 
@@ -1515,8 +1599,8 @@
             <div class="date-label">Saturday, Nov 23</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
-            <div class="indicator-dot weigh"></div>
+            <div class="indicator-dot tasks unfilled"></div>
+            <div class="indicator-dot weigh unfilled"></div>
           </div>
         </div>
 
@@ -1565,7 +1649,7 @@
             <div class="date-label">Sunday, Nov 24</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot tasks unfilled"></div>
           </div>
         </div>
 
@@ -1603,8 +1687,8 @@
             <div class="date-label">Monday, Nov 25</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
-            <div class="indicator-dot coaching"></div>
+            <div class="indicator-dot tasks unfilled"></div>
+            <div class="indicator-dot coaching unfilled"></div>
           </div>
         </div>
 
@@ -1650,7 +1734,7 @@
             <div class="date-label">Tuesday, Nov 26</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot tasks unfilled"></div>
           </div>
         </div>
 
@@ -1688,7 +1772,7 @@
             <div class="date-label">Wednesday, Nov 27</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot tasks unfilled"></div>
           </div>
         </div>
 
@@ -1726,7 +1810,7 @@
             <div class="date-label">Thursday, Nov 28</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot tasks unfilled"></div>
           </div>
         </div>
 
@@ -1764,9 +1848,9 @@
             <div class="date-label">Friday, Nov 29</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
-            <div class="indicator-dot weigh"></div>
-            <div class="indicator-dot note"></div>
+            <div class="indicator-dot tasks unfilled"></div>
+            <div class="indicator-dot weigh unfilled"></div>
+            <div class="indicator-dot note unfilled"></div>
           </div>
         </div>
 
@@ -1815,7 +1899,7 @@
             <div class="date-label">Saturday, Nov 30</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot labs"></div>
+            <div class="indicator-dot labs unfilled"></div>
           </div>
         </div>
 
@@ -1843,7 +1927,7 @@
             <div class="date-label">Sunday, Dec 1</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot tasks unfilled"></div>
           </div>
         </div>
 
@@ -1881,8 +1965,8 @@
             <div class="date-label">Monday, Dec 2</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot tasks"></div>
-            <div class="indicator-dot coaching"></div>
+            <div class="indicator-dot tasks unfilled"></div>
+            <div class="indicator-dot coaching unfilled"></div>
           </div>
         </div>
 
@@ -1928,7 +2012,7 @@
             <div class="date-label">Thursday, Dec 12</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot coaching"></div>
+            <div class="indicator-dot coaching unfilled"></div>
           </div>
         </div>
 
@@ -1953,7 +2037,7 @@
             <div class="date-label">Sunday, Mar 2, 2026</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot labs"></div>
+            <div class="indicator-dot labs unfilled"></div>
           </div>
         </div>
 
@@ -1981,7 +2065,7 @@
             <div class="date-label">Monday, Jun 2, 2026</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot labs"></div>
+            <div class="indicator-dot labs unfilled"></div>
           </div>
         </div>
 
@@ -2034,6 +2118,16 @@
         <button class="save-weight-button" id="saveButton" onclick="saveWeight()" disabled>
           Save Weight
         </button>
+      </div>
+    </div>
+
+    <!-- Coming Soon Modal -->
+    <div class="modal-overlay center" id="comingSoonModal">
+      <div class="coming-soon-modal">
+        <div class="coming-soon-icon">🚀</div>
+        <h2 class="coming-soon-title">Coming Soon</h2>
+        <p class="coming-soon-text">This feature is currently under development and will be available soon.</p>
+        <button class="coming-soon-button" onclick="closeComingSoon()">Got It</button>
       </div>
     </div>
 
@@ -2261,9 +2355,35 @@
       }
     }
 
+    // Coming Soon modal
+    function openComingSoon() {
+      const modal = document.getElementById('comingSoonModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeComingSoon() {
+      const modal = document.getElementById('comingSoonModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close modal when clicking overlay
+    document.getElementById('comingSoonModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeComingSoon();
+      }
+    });
+
     // Bottom navigation
-    document.querySelectorAll('.nav-item').forEach(item => {
+    document.querySelectorAll('.nav-item').forEach((item, index) => {
       item.addEventListener('click', function() {
+        // If not the To-Do tab (index 0), show coming soon
+        if (index !== 0) {
+          openComingSoon();
+          return;
+        }
+
         document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
         this.classList.add('active');
       });
