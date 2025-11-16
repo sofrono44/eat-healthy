@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <title>Revero - Plan</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: #F7F8FA;
+      color: #2C3E50;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Color system */
+    :root {
+      --color-turquoise: #3DB6CE;
+      --color-turquoise-light: #5ACFDD;
+      --color-turquoise-dark: #2A8A9E;
+      --color-charcoal: #2C3E50;
+      --color-gray-light: #F7F8FA;
+      --color-gray-medium: #6B7280;
+      --color-gray-border: #E5E7EB;
+      --color-success: #88CC66;
+      --color-success-light: #F5F9E8;
+      --color-warning: #5BC5D9;
+      --color-error: #EF8A8A;
+      --color-purple: #8B5FA0;
+      --color-white: #FFFFFF;
+      
+      /* Shadows */
+      --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+      --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Mobile container */
+    .mobile-frame {
+      max-width: 375px;
+      margin: 0 auto;
+      background: white;
+      min-height: 100vh;
+      position: relative;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Status bar */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 16px;
+      background: var(--color-turquoise);
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .status-icons {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .signal-bars {
+      display: flex;
+      gap: 2px;
+      align-items: flex-end;
+      height: 14px;
+    }
+
+    .signal-bar {
+      width: 3px;
+      background: white;
+      border-radius: 1px;
+    }
+
+    .signal-bar:nth-child(1) { height: 4px; }
+    .signal-bar:nth-child(2) { height: 7px; }
+    .signal-bar:nth-child(3) { height: 10px; }
+    .signal-bar:nth-child(4) { height: 13px; }
+
+    .battery-icon {
+      display: flex;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .battery-body {
+      width: 22px;
+      height: 11px;
+      border: 2px solid white;
+      border-radius: 2px;
+      padding: 1px;
+      display: flex;
+      align-items: center;
+    }
+
+    .battery-level {
+      width: 100%;
+      height: 100%;
+      background: white;
+      border-radius: 1px;
+    }
+
+    .battery-tip {
+      width: 2px;
+      height: 6px;
+      background: white;
+      border-radius: 0 1px 1px 0;
+    }
+
+    /* Compact Header */
+    .header {
+      background: var(--color-turquoise);
+      color: white;
+      padding: 8px 16px 12px;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 4px 12px rgba(61, 182, 206, 0.15);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      min-height: 40px;
+    }
+
+    .header-title {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .menu-button {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 150ms ease;
+    }
+
+    .menu-button:active {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Filter pills - compact single row */
+    .filter-pills {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .filter-pills::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-pill {
+      padding: 6px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      border: none;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .filter-pill.active {
+      background: white;
+      color: var(--color-turquoise);
+    }
+
+    .filter-pill:active {
+      transform: scale(0.95);
+    }
+
+    /* Reminder banner */
+    .reminder-banner {
+      margin: 16px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #5BC5D9 0%, #3DB6CE 100%);
+      border-radius: 12px;
+      color: white;
+      box-shadow: var(--shadow-2);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .reminder-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .reminder-content {
+      flex: 1;
+    }
+
+    .reminder-text {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .reminder-dismiss {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 150ms ease;
+      flex-shrink: 0;
+    }
+
+    .reminder-dismiss:active {
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .reminder-banner.hidden {
+      display: none;
+    }
+
+    /* Calendar list */
+    .calendar-list {
+      padding: 0 16px 80px 16px;
+    }
+
+    /* Labs reminder banner */
+    .reminder-banner {
+      margin: 16px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #FFE9A3 0%, #FFD64B 100%);
+      border-radius: 12px;
+      color: #2C3E50;
+      box-shadow: var(--shadow-2);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .reminder-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .reminder-content {
+      flex: 1;
+    }
+
+    .reminder-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .reminder-subtitle {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    .date-section {
+      margin-bottom: 24px;
+    }
+
+    .date-section.focus-card {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: var(--shadow-2);
+      margin-bottom: 32px;
+    }
+
+    .date-section.focus-card .date-header {
+      margin-bottom: 16px;
+    }
+
+    .date-section.focus-card .task-card {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .date-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding: 8px 0;
+    }
+
+    .date-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-charcoal);
+    }
+
+    .date-badge {
+      font-size: 12px;
+      padding: 4px 10px;
+      background: var(--color-turquoise);
+      color: white;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+
+    .date-indicators {
+      display: flex;
+      gap: 8px;
+    }
+
+    .indicator-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .indicator-dot.tasks {
+      background: #2A8A9E;
+    }
+
+    .indicator-dot.weigh {
+      background: #BD9B00;
+    }
+
+    .indicator-dot.coaching {
+      background: #6F4A80;
+    }
+
+    .indicator-dot.note {
+      background: #D77A0F;
+    }
+
+    /* Simplified task card - unified for all types */
+    .task-card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-1);
+      border-left: 4px solid transparent;
+      transition: all 200ms ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .task-card.completed {
+      opacity: 0.7;
+      border-left-color: var(--color-success);
+    }
+
+    .task-card.active {
+      box-shadow: var(--shadow-2);
+    }
+
+    .task-checkbox {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--color-gray-border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .task-checkbox.checked {
+      background: var(--color-success);
+      border-color: var(--color-success);
+    }
+
+    .task-checkbox.checked::after {
+      content: '\2713';
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .task-checkbox.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    /* Simplified status bar icons */
+    .status-icons {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .signal-icon {
+      display: flex;
+      gap: 1px;
+      align-items: flex-end;
+    }
+
+    .signal-bar {
+      width: 3px;
+      background: white;
+      border-radius: 1px;
+    }
+
+    .signal-bar:nth-child(1) { height: 4px; }
+    .signal-bar:nth-child(2) { height: 6px; }
+    .signal-bar:nth-child(3) { height: 8px; }
+    .signal-bar:nth-child(4) { height: 10px; }
+
+    .battery-icon {
+      width: 20px;
+      height: 10px;
+      border: 1.5px solid white;
+      border-radius: 2px;
+      position: relative;
+      padding: 1.5px;
+    }
+
+    .battery-icon::before {
+      content: '';
+      position: absolute;
+      right: -3px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 4px;
+      background: white;
+      border-radius: 0 1px 1px 0;
+    }
+
+    .battery-level {
+      width: 70%;
+      height: 100%;
+      background: white;
+      border-radius: 1px;
+    }
+
+    .task-checkbox.disabled {
+      background: var(--color-gray-100);
+      border-color: var(--color-gray-300);
+      cursor: not-allowed;
+    }
+
+    .task-main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .task-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    .task-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-charcoal);
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .task-action-button {
+      padding: 6px 14px;
+      border-radius: 6px;
+      background: var(--color-turquoise);
+      color: white;
+      border: none;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 150ms ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .task-action-button:active {
+      background: var(--color-turquoise-dark);
+      transform: scale(0.97);
+    }
+
+    .task-description {
+      font-size: 14px;
+      color: var(--color-gray-medium);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .task-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .task-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .task-badge.nutrition {
+      background: var(--color-success-light);
+      color: #5EA044;
+    }
+
+    .task-badge.tracking {
+      background: #E8F8FB;
+      color: #2A8A9E;
+    }
+
+    .task-streak {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--color-gray-medium);
+    }
+
+    .streak-dots {
+      display: flex;
+      gap: 3px;
+    }
+
+    .streak-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-gray-border);
+    }
+
+    .streak-dot.active {
+      background: var(--color-success);
+    }
+
+    /* Biomarker entry card */
+    .biomarker-card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .biomarker-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .biomarker-icon.weight {
+      background: #FFE8D1;
+    }
+
+    .biomarker-icon.symptoms {
+      background: #C6EFF5;
+    }
+
+    .biomarker-content {
+      flex: 1;
+    }
+
+    .biomarker-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-charcoal);
+      margin-bottom: 2px;
+    }
+
+    .biomarker-description {
+      font-size: 13px;
+      color: var(--color-gray-medium);
+    }
+
+    .biomarker-button {
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: var(--color-turquoise);
+      color: white;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 150ms ease;
+      white-space: nowrap;
+    }
+
+    .biomarker-button:active {
+      background: var(--color-turquoise-dark);
+      transform: scale(0.97);
+    }
+
+    /* Bottom navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-width: 375px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      background: white;
+      border-top: 1px solid var(--color-gray-border);
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
+      z-index: 100;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 4px 12px;
+      gap: 4px;
+      border: none;
+      background: transparent;
+      color: var(--color-gray-medium);
+      cursor: pointer;
+      transition: color 150ms ease;
+      min-height: 64px;
+    }
+
+    .nav-item.active {
+      color: var(--color-turquoise);
+    }
+
+    .nav-item:active {
+      background: var(--color-gray-light);
+    }
+
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Simplified nav icons - using CSS shapes */
+    .icon-plan::before {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border: 2px solid currentColor;
+      border-radius: 3px;
+      position: absolute;
+    }
+    .icon-plan::after {
+      content: '';
+      width: 8px;
+      height: 2px;
+      background: currentColor;
+      position: absolute;
+      top: 10px;
+      border-radius: 1px;
+    }
+
+    .icon-nutrition::before {
+      content: '';
+      width: 14px;
+      height: 14px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .icon-nutrition::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: currentColor;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .icon-history::before,
+    .icon-history::after {
+      content: '';
+      width: 3px;
+      background: currentColor;
+      position: absolute;
+      bottom: 4px;
+    }
+    .icon-history::before {
+      height: 12px;
+      left: 8px;
+    }
+    .icon-history::after {
+      height: 16px;
+      right: 8px;
+    }
+
+    .icon-resources::before {
+      content: '';
+      width: 14px;
+      height: 16px;
+      border: 2px solid currentColor;
+      border-radius: 2px;
+      position: absolute;
+    }
+    .icon-resources::after {
+      content: '';
+      width: 6px;
+      height: 2px;
+      background: currentColor;
+      position: absolute;
+      top: 10px;
+      border-radius: 1px;
+    }
+
+    .icon-chat::before {
+      content: '';
+      width: 16px;
+      height: 12px;
+      border: 2px solid currentColor;
+      border-radius: 4px;
+      position: absolute;
+      top: 4px;
+    }
+    .icon-chat::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      border-top: 4px solid currentColor;
+      position: absolute;
+      bottom: 4px;
+    }
+
+    .nav-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .nav-label {
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    /* Compact future date row */
+    .date-row-compact {
+      background: white;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 8px;
+      box-shadow: var(--shadow-1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .date-row-compact:active {
+      transform: scale(0.98);
+      box-shadow: var(--shadow-2);
+    }
+
+    .date-row-compact .date-label {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--color-charcoal);
+    }
+
+    /* Expandable task detail */
+    .task-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 300ms ease;
+      padding: 0 16px;
+    }
+
+    .task-detail.expanded {
+      max-height: 200px;
+      padding: 12px 16px 0;
+      border-top: 1px solid var(--color-gray-border);
+      margin-top: 12px;
+    }
+
+    .detail-progress {
+      margin-bottom: 12px;
+    }
+
+    .progress-label {
+      font-size: 13px;
+      color: var(--color-gray-medium);
+      margin-bottom: 6px;
+    }
+
+    .progress-bar-container {
+      height: 8px;
+      background: var(--color-gray-border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--color-success);
+      border-radius: 4px;
+      transition: width 300ms ease;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+    }
+
+    .empty-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+      opacity: 0.3;
+      font-size: 48px;
+    }
+
+    .empty-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-charcoal);
+      margin-bottom: 8px;
+    }
+
+    .empty-description {
+      font-size: 14px;
+      color: var(--color-gray-medium);
+    }
+
+    /* Weight input modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: flex-end;
+      z-index: 200;
+      animation: fadeIn 200ms ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .weight-input-modal {
+      background: white;
+      border-radius: 20px 20px 0 0;
+      width: 100%;
+      max-width: 375px;
+      margin: 0 auto;
+      padding: 24px 20px;
+      animation: slideUp 300ms ease;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-charcoal);
+    }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: var(--color-gray-light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      color: var(--color-gray-medium);
+      transition: background 150ms ease;
+    }
+
+    .modal-close:active {
+      background: var(--color-gray-border);
+    }
+
+    .weight-display {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .weight-value {
+      font-size: 48px;
+      font-weight: 600;
+      color: var(--color-charcoal);
+      font-variant-numeric: tabular-nums;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .weight-unit {
+      font-size: 24px;
+      color: var(--color-gray-medium);
+      margin-left: 8px;
+    }
+
+    .weight-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 48px;
+      background: var(--color-turquoise);
+      animation: blink 1s infinite;
+      margin-left: 4px;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .numeric-keyboard {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .key-button {
+      aspect-ratio: 1;
+      border: none;
+      background: var(--color-gray-light);
+      border-radius: 12px;
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      cursor: pointer;
+      transition: all 150ms ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .key-button:active {
+      background: var(--color-gray-border);
+      transform: scale(0.95);
+    }
+
+    .key-button.decimal {
+      font-size: 32px;
+    }
+
+    .key-button.delete {
+      background: #FEE2E2;
+      color: #DC2626;
+      font-size: 20px;
+    }
+
+    .key-button.delete:active {
+      background: #FECACA;
+    }
+
+    .save-weight-button {
+      width: 100%;
+      padding: 16px;
+      border-radius: 12px;
+      background: var(--color-turquoise);
+      color: white;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .save-weight-button:active {
+      background: var(--color-turquoise-dark);
+      transform: scale(0.98);
+    }
+
+    .save-weight-button:disabled {
+      background: var(--color-gray-border);
+      color: var(--color-gray-medium);
+      cursor: not-allowed;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .date-section {
+      animation: slideIn 300ms ease;
+    }
+
+    /* Responsive adjustments */
+    @media (min-width: 376px) {
+      .mobile-frame {
+        max-width: 100%;
+      }
+      
+      .bottom-nav {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span>10:00</span>
+      <div class="status-icons">
+        <div class="signal-bars">
+          <div class="signal-bar"></div>
+          <div class="signal-bar"></div>
+          <div class="signal-bar"></div>
+          <div class="signal-bar"></div>
+        </div>
+        <span>LTE</span>
+        <div class="battery-icon">
+          <div class="battery-body">
+            <div class="battery-level"></div>
+          </div>
+          <div class="battery-tip"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-top">
+        <h1 class="header-title">To-Do</h1>
+        <button class="menu-button">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-3.87 3.13-7 7-7h2c3.87 0 7 3.13 7 7"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Filter Pills -->
+      <div class="filter-pills">
+        <button class="filter-pill active" onclick="setFilter('nutrition')">Tasks</button>
+        <button class="filter-pill" onclick="setFilter('appointments')">Appointments</button>
+        <button class="filter-pill" onclick="setFilter('biomarkers')">Labs</button>
+        <button class="filter-pill" onclick="setFilter('all')">All</button>
+      </div>
+    </div>
+
+    <!-- Reminder Banner -->
+    <div class="reminder-banner" id="reminderBanner">
+      <div class="reminder-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 2v7.31"/>
+          <path d="M14 9.3V1.99"/>
+          <path d="M8.5 2h7"/>
+          <path d="M14 9.3a6.5 6.5 0 1 1-4 0"/>
+          <path d="M5.58 16.5h12.85"/>
+        </svg>
+      </div>
+      <div class="reminder-content">
+        <div class="reminder-text">Reminder - labs due in 6 days</div>
+      </div>
+      <button class="reminder-dismiss" onclick="dismissReminder()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Calendar List -->
+    <div class="calendar-list" id="calendarList">
+      <!-- Today Section -->
+      <div class="date-section focus-card">
+        <div class="date-header">
+          <div>
+            <div class="date-label">Today</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot weigh" title="Weigh-in day"></div>
+          </div>
+        </div>
+
+        <!-- Weekly Weigh-in -->
+        <div class="task-card">
+          <div class="task-checkbox disabled"></div>
+          <div class="task-main">
+            <div class="task-header-row">
+              <div class="task-title">Weekly Weigh-In</div>
+              <button class="task-action-button" onclick="openWeightInput()">Enter</button>
+            </div>
+            <div class="task-description">Record your weight</div>
+          </div>
+        </div>
+
+        <!-- General Symptoms -->
+        <div class="task-card">
+          <div class="task-checkbox disabled"></div>
+          <div class="task-main">
+            <div class="task-header-row">
+              <div class="task-title">General Symptoms</div>
+              <button class="task-action-button">Enter</button>
+            </div>
+            <div class="task-description">Log how you're feeling</div>
+          </div>
+        </div>
+
+        <!-- Nutrition Goals -->
+        <div class="task-card completed" onclick="toggleTaskDetail(this)">
+          <div class="task-checkbox checked" onclick="event.stopPropagation(); toggleTask(this)"></div>
+          <div class="task-main">
+            <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            <div class="task-detail">
+              <div class="detail-progress">
+                <div class="progress-label">Today: 12g / 30g carbs</div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar" style="width: 40%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-card" onclick="toggleTaskDetail(this)">
+          <div class="task-checkbox" onclick="event.stopPropagation(); toggleTask(this)"></div>
+          <div class="task-main">
+            <div class="task-title">Ate 120 Grams of Protein</div>
+            <div class="task-detail">
+              <div class="detail-progress">
+                <div class="progress-label">Today: 45g / 120g protein</div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar" style="width: 37.5%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-card completed">
+          <div class="task-checkbox checked" onclick="toggleTask(this)"></div>
+          <div class="task-main">
+            <div class="task-title">Followed The Nutrition Plan's Food List</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tomorrow Section - Compact -->
+      <div class="date-section">
+        <div class="date-header">
+          <div class="date-label">Tomorrow, Monday Nov 17</div>
+        </div>
+
+        <div class="date-row-compact">
+          <div class="date-label">Daily tasks</div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tuesday Section - Compact -->
+      <div class="date-section">
+        <div class="date-header">
+          <div class="date-label">Tuesday, Nov 18</div>
+        </div>
+
+        <div class="date-row-compact">
+          <div class="date-label">Daily tasks & note</div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot note"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Next Weigh-In -->
+      <div class="date-section">
+        <div class="date-header">
+          <div class="date-label">Saturday, Nov 23</div>
+        </div>
+
+        <div class="date-row-compact">
+          <div class="date-label">Daily tasks & weigh-in</div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot weigh"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coaching Session -->
+      <div class="date-section">
+        <div class="date-header">
+          <div class="date-label">Monday, Nov 25</div>
+        </div>
+
+        <div class="date-row-compact">
+          <div class="date-label">Daily tasks & coaching session</div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot coaching"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example with multiple special items -->
+      <div class="date-section">
+        <div class="date-header">
+          <div class="date-label">Friday, Nov 29</div>
+        </div>
+
+        <div class="date-row-compact">
+          <div class="date-label">Daily tasks, weigh-in & note</div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot weigh"></div>
+            <div class="indicator-dot note"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- December Coaching Session -->
+      <div class="date-section">
+        <div class="date-header">
+          <div class="date-label">Monday, Dec 2</div>
+        </div>
+
+        <div class="date-row-compact">
+          <div class="date-label">Daily tasks & coaching session</div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot coaching"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Physician Consultation -->
+      <div class="date-section">
+        <div class="date-header">
+          <div class="date-label">Thursday, Dec 12</div>
+        </div>
+
+        <div class="date-row-compact">
+          <div class="date-label">Physician consultation</div>
+          <div class="date-indicators">
+            <div class="indicator-dot coaching"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weight Input Modal -->
+    <div class="modal-overlay" id="weightModal">
+      <div class="weight-input-modal">
+        <div class="modal-header">
+          <h2 class="modal-title">Weekly Weigh-In</h2>
+          <button class="modal-close" onclick="closeWeightInput()">✕</button>
+        </div>
+
+        <div class="weight-display">
+          <div class="weight-value">
+            <span id="weightValue">--</span>
+            <span class="weight-unit">lbs</span>
+            <span class="weight-cursor" id="cursor"></span>
+          </div>
+        </div>
+
+        <div class="numeric-keyboard">
+          <button class="key-button" onclick="addDigit('1')">1</button>
+          <button class="key-button" onclick="addDigit('2')">2</button>
+          <button class="key-button" onclick="addDigit('3')">3</button>
+          <button class="key-button" onclick="addDigit('4')">4</button>
+          <button class="key-button" onclick="addDigit('5')">5</button>
+          <button class="key-button" onclick="addDigit('6')">6</button>
+          <button class="key-button" onclick="addDigit('7')">7</button>
+          <button class="key-button" onclick="addDigit('8')">8</button>
+          <button class="key-button" onclick="addDigit('9')">9</button>
+          <button class="key-button decimal" onclick="addDigit('.')">.</button>
+          <button class="key-button" onclick="addDigit('0')">0</button>
+          <button class="key-button delete" onclick="deleteDigit()">⌫</button>
+        </div>
+
+        <button class="save-weight-button" id="saveButton" onclick="saveWeight()" disabled>
+          Save Weight
+        </button>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+      <button class="nav-item active">
+        <div class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+        <div class="nav-label">To-Do</div>
+      </button>
+      <button class="nav-item">
+        <div class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+        </div>
+        <div class="nav-label">Nutrition</div>
+      </button>
+      <button class="nav-item">
+        <div class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="20" x2="12" y2="10"/>
+            <line x1="18" y1="20" x2="18" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="16"/>
+          </svg>
+        </div>
+        <div class="nav-label">History</div>
+      </button>
+      <button class="nav-item">
+        <div class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+        </div>
+        <div class="nav-label">Resources</div>
+      </button>
+      <button class="nav-item">
+        <div class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <div class="nav-label">Chat</div>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Dismiss reminder banner
+    function dismissReminder() {
+      const banner = document.getElementById('reminderBanner');
+      banner.classList.add('hidden');
+    }
+
+    // Weight input state
+    let weightInput = '';
+    
+    function openWeightInput() {
+      const modal = document.getElementById('weightModal');
+      modal.classList.add('active');
+      weightInput = '';
+      updateWeightDisplay();
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeWeightInput() {
+      const modal = document.getElementById('weightModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    function addDigit(digit) {
+      // Prevent multiple decimal points
+      if (digit === '.' && weightInput.includes('.')) {
+        return;
+      }
+      
+      // Limit to reasonable weight values (max 999.9)
+      if (weightInput.length >= 5) {
+        return;
+      }
+      
+      // Prevent starting with decimal
+      if (digit === '.' && weightInput === '') {
+        weightInput = '0.';
+      } else {
+        weightInput += digit;
+      }
+      
+      updateWeightDisplay();
+    }
+    
+    function deleteDigit() {
+      weightInput = weightInput.slice(0, -1);
+      updateWeightDisplay();
+    }
+    
+    function updateWeightDisplay() {
+      const display = document.getElementById('weightValue');
+      const saveButton = document.getElementById('saveButton');
+      const cursor = document.getElementById('cursor');
+      
+      if (weightInput === '') {
+        display.textContent = '--';
+        cursor.style.display = 'none';
+        saveButton.disabled = true;
+      } else {
+        display.textContent = weightInput;
+        cursor.style.display = 'inline-block';
+        
+        // Enable save button if we have a valid number
+        const weight = parseFloat(weightInput);
+        saveButton.disabled = isNaN(weight) || weight < 50 || weight > 999;
+      }
+    }
+    
+    function saveWeight() {
+      const weight = parseFloat(weightInput);
+      
+      if (!isNaN(weight) && weight >= 50 && weight <= 999) {
+        // Here you would typically save to backend
+        console.log('Saving weight:', weight);
+        
+        // Show success feedback (you could add a toast notification here)
+        const saveButton = document.getElementById('saveButton');
+        const originalText = saveButton.textContent;
+        saveButton.textContent = '✓ Saved!';
+        saveButton.style.background = 'var(--color-success)';
+        
+        setTimeout(() => {
+          closeWeightInput();
+          // Reset button
+          saveButton.textContent = originalText;
+          saveButton.style.background = 'var(--color-turquoise)';
+          
+          // Mark the weigh-in task as completed
+          const weighInCard = document.querySelector('.task-card');
+          const checkbox = weighInCard.querySelector('.task-checkbox');
+          checkbox.classList.remove('disabled');
+          checkbox.classList.add('checked');
+          weighInCard.classList.add('completed');
+          
+          // Update task description to show the recorded weight
+          const description = weighInCard.querySelector('.task-description');
+          description.textContent = `Recorded: ${weight} lbs`;
+        }, 1000);
+      }
+    }
+    
+    // Close modal when clicking overlay
+    document.getElementById('weightModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeWeightInput();
+      }
+    });
+
+    // Task toggling
+    function toggleTask(checkbox) {
+      checkbox.classList.toggle('checked');
+      const card = checkbox.closest('.task-card');
+      if (card) {
+        card.classList.toggle('completed');
+      }
+    }
+
+    // Task detail expansion
+    function toggleTaskDetail(card) {
+      const detail = card.querySelector('.task-detail');
+      if (detail) {
+        detail.classList.toggle('expanded');
+      }
+    }
+
+    // Filter functionality
+    let currentFilter = 'nutrition';  // Default to Tasks filter
+    
+    function setFilter(filter) {
+      currentFilter = filter;
+      
+      // Update active pill
+      document.querySelectorAll('.filter-pill').forEach(pill => {
+        pill.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      // Filter content
+      const sections = document.querySelectorAll('.date-section');
+      
+      if (filter === 'all') {
+        sections.forEach(s => s.style.display = 'block');
+      } else if (filter === 'appointments') {
+        sections.forEach(s => {
+          const hasAppointment = s.querySelector('.indicator-dot.coaching') !== null;
+          s.style.display = hasAppointment ? 'block' : 'none';
+        });
+      } else if (filter === 'biomarkers') {
+        sections.forEach(s => {
+          const hasBiomarker = s.querySelector('.indicator-dot.weigh') !== null ||
+                               s.textContent.includes('Weigh-In') ||
+                               s.textContent.includes('Symptoms');
+          s.style.display = hasBiomarker ? 'block' : 'none';
+        });
+      } else if (filter === 'nutrition') {
+        sections.forEach(s => {
+          const hasNutrition = s.querySelector('.task-badge.nutrition') !== null ||
+                               s.querySelector('.indicator-dot.tasks') !== null;
+          s.style.display = hasNutrition ? 'block' : 'none';
+        });
+      }
+    }
+
+    // Bottom navigation
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', function() {
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Initial animation
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.date-section').forEach((section, index) => {
+        section.style.animationDelay = `${index * 100}ms`;
+      });
+    });
+  </script>
+</body>
+</html>
