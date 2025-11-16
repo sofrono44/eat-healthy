@@ -392,6 +392,10 @@
       background: #BD9B00;
     }
 
+    .indicator-dot.labs {
+      background: #E8538B;
+    }
+
     .indicator-dot.coaching {
       background: #6F4A80;
     }
@@ -1507,7 +1511,7 @@
             <div class="date-label">Saturday, Nov 30</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot weigh"></div>
+            <div class="indicator-dot labs"></div>
           </div>
         </div>
 
@@ -1607,7 +1611,7 @@
             <div class="date-label">Sunday, Mar 2, 2026</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot weigh"></div>
+            <div class="indicator-dot labs"></div>
           </div>
         </div>
 
@@ -1635,7 +1639,7 @@
             <div class="date-label">Monday, Jun 2, 2026</div>
           </div>
           <div class="date-indicators">
-            <div class="indicator-dot weigh"></div>
+            <div class="indicator-dot labs"></div>
           </div>
         </div>
 
@@ -1899,10 +1903,8 @@
         });
       } else if (filter === 'biomarkers') {
         sections.forEach(s => {
-          const hasBiomarker = s.querySelector('.indicator-dot.weigh') !== null ||
-                               s.textContent.includes('Weigh-In') ||
-                               s.textContent.includes('Symptoms');
-          s.style.display = hasBiomarker ? 'block' : 'none';
+          const hasLabs = s.querySelector('.indicator-dot.labs') !== null;
+          s.style.display = hasLabs ? 'block' : 'none';
         });
       } else if (filter === 'nutrition') {
         sections.forEach(s => {
