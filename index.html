@@ -321,11 +321,6 @@
       margin-bottom: 0;
     }
 
-    /* Hide daily-only sections by default when specific filters are applied */
-    .date-section.daily-only.filter-hidden {
-      display: none;
-    }
-
     .task-cards-container {
       max-height: 2000px;
       overflow: hidden;
@@ -2240,27 +2235,21 @@
 
       // Filter content
       const sections = document.querySelectorAll('.date-section');
-      const dailyOnlySections = document.querySelectorAll('.date-section.daily-only');
 
       if (filter === 'all') {
         // Show all sections including daily-only
         sections.forEach(s => {
           s.style.display = 'block';
-          s.classList.remove('filter-hidden');
         });
       } else if (filter === 'appointments') {
-        // Hide daily-only sections, show only appointments
-        dailyOnlySections.forEach(s => s.classList.add('filter-hidden'));
+        // Show only appointments, hide daily-only and others
         sections.forEach(s => {
-          if (s.classList.contains('daily-only')) return;
           const hasAppointment = s.querySelector('.indicator-dot.coaching') !== null;
           s.style.display = hasAppointment ? 'block' : 'none';
         });
       } else if (filter === 'biomarkers') {
-        // Hide daily-only sections, show only labs
-        dailyOnlySections.forEach(s => s.classList.add('filter-hidden'));
+        // Show only labs, hide daily-only and others
         sections.forEach(s => {
-          if (s.classList.contains('daily-only')) return;
           const hasLabs = s.querySelector('.indicator-dot.labs') !== null;
           s.style.display = hasLabs ? 'block' : 'none';
         });
@@ -2268,7 +2257,6 @@
         // Show all sections including daily-only (all have tasks)
         sections.forEach(s => {
           s.style.display = 'block';
-          s.classList.remove('filter-hidden');
         });
       }
     }
