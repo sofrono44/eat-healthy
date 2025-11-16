@@ -378,8 +378,7 @@
     }
 
     .date-indicators {
-      display: flex;
-      gap: 8px;
+      display: none;
     }
 
     .indicator-dot {
@@ -454,7 +453,6 @@
 
     .task-card.completed {
       opacity: 0.7;
-      border-left-color: var(--color-success);
     }
 
     .task-card.active {
@@ -589,6 +587,24 @@
     .task-action-button:active {
       background: var(--color-turquoise-dark);
       transform: scale(0.97);
+    }
+
+    .task-dismiss-button {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: none;
+      color: var(--color-gray-medium);
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      transition: color 150ms ease;
+      flex-shrink: 0;
+      padding: 0;
+    }
+
+    .task-dismiss-button:active {
+      color: var(--color-charcoal);
     }
 
     .task-description {
@@ -898,7 +914,7 @@
     }
 
     .task-detail.expanded {
-      max-height: 200px;
+      max-height: 300px;
       padding: 12px 16px 0;
       border-top: 1px solid var(--color-gray-border);
       margin-top: 12px;
@@ -908,17 +924,32 @@
       margin-bottom: 12px;
     }
 
-    .progress-label {
-      font-size: 13px;
-      color: var(--color-gray-medium);
+    .progress-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin-bottom: 6px;
     }
 
+    .progress-label {
+      font-size: 13px;
+      color: var(--color-gray-medium);
+      flex: 1;
+    }
+
+    .task-action-button.compact {
+      padding: 4px 12px;
+      font-size: 12px;
+      height: auto;
+    }
+
     .progress-bar-container {
+      position: relative;
       height: 8px;
       background: var(--color-gray-border);
       border-radius: 4px;
-      overflow: hidden;
+      overflow: visible;
+      width: 110%;
     }
 
     .progress-bar {
@@ -926,6 +957,35 @@
       background: var(--color-success);
       border-radius: 4px;
       transition: width 300ms ease;
+    }
+
+    .progress-goal-notch {
+      position: absolute;
+      top: -2px;
+      width: 2px;
+      height: 12px;
+      background: var(--color-charcoal);
+      border-radius: 1px;
+    }
+
+    /* Biomarker items */
+    .biomarker-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-gray-border);
+    }
+
+    .biomarker-item:last-child {
+      border-bottom: none;
+    }
+
+    .biomarker-label {
+      font-size: 14px;
+      color: var(--color-charcoal);
+      font-weight: 500;
+      flex: 1;
     }
 
     /* Empty state */
@@ -1181,6 +1241,92 @@
       transform: scale(0.98);
     }
 
+    /* Symptoms Modal */
+    .symptoms-modal {
+      background: white;
+      border-radius: 20px 20px 0 0;
+      width: 100%;
+      max-width: 375px;
+      margin: 0 auto;
+      padding: 24px 20px;
+      animation: slideUp 300ms ease;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .symptoms-content {
+      margin-bottom: 24px;
+    }
+
+    .symptom-group {
+      margin-bottom: 24px;
+    }
+
+    .symptom-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .symptom-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-charcoal);
+      margin-bottom: 12px;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      background: var(--color-gray-light);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .radio-option:active {
+      background: var(--color-gray-border);
+      transform: scale(0.98);
+    }
+
+    .radio-option input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      margin: 0;
+      margin-right: 12px;
+      cursor: pointer;
+      accent-color: var(--color-turquoise);
+    }
+
+    .radio-label {
+      font-size: 15px;
+      color: var(--color-charcoal);
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .save-symptoms-button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      background: var(--color-turquoise);
+      color: white;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .save-symptoms-button:active {
+      background: var(--color-turquoise-dark);
+      transform: scale(0.98);
+    }
+
     .modal-overlay.center {
       align-items: center;
       justify-content: center;
@@ -1238,7 +1384,7 @@
     <!-- Header -->
     <div class="header">
       <div class="header-top">
-        <h1 class="header-title">To-Do</h1>
+        <h1 class="header-title">To Do</h1>
         <button class="menu-button">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="8" r="4"/>
@@ -1252,7 +1398,6 @@
         <button class="filter-pill active" onclick="setFilter('nutrition')">Tasks</button>
         <button class="filter-pill" onclick="setFilter('appointments')">Appointments</button>
         <button class="filter-pill" onclick="setFilter('biomarkers')">Labs</button>
-        <button class="filter-pill" onclick="setFilter('all')">All</button>
       </div>
     </div>
 
@@ -1281,7 +1426,7 @@
     <!-- Calendar List -->
     <div class="calendar-list" id="calendarList">
       <!-- Today Section -->
-      <div class="date-section collapsed">
+      <div class="date-section">
         <div class="date-header" onclick="toggleDateSection(this)">
           <div class="date-header-left">
             <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1296,65 +1441,84 @@
         </div>
 
         <div class="task-cards-container">
-        <!-- Weekly Weigh-in -->
-        <div class="task-card">
-          <div class="task-checkbox disabled"></div>
+        <!-- Record Biomarkers -->
+        <div class="task-card" onclick="toggleTaskDetail(this)">
+          <div class="task-checkbox" onclick="event.stopPropagation(); toggleTask(this)"></div>
           <div class="task-main">
             <div class="task-header-row">
-              <div class="task-title">Weekly Weigh-In</div>
-              <button class="task-action-button" onclick="openWeightInput()">Enter</button>
+              <div class="task-title">Record Biomarkers</div>
+              <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
             </div>
-            <div class="task-description">Record your weight</div>
-          </div>
-        </div>
-
-        <!-- General Symptoms -->
-        <div class="task-card">
-          <div class="task-checkbox disabled"></div>
-          <div class="task-main">
-            <div class="task-header-row">
-              <div class="task-title">General Symptoms</div>
-              <button class="task-action-button">Enter</button>
+            <div class="task-detail">
+              <div class="biomarker-item">
+                <div class="biomarker-label">General Symptoms</div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="task-action-button" onclick="event.stopPropagation(); openSymptomsModal()">Add</button>
+                  <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissBiomarkerItem(this)">×</button>
+                </div>
+              </div>
+              <div class="biomarker-item">
+                <div class="biomarker-label">Weight</div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="task-action-button" onclick="event.stopPropagation(); openWeightInput()">Add</button>
+                  <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissBiomarkerItem(this)">×</button>
+                </div>
+              </div>
+              <div class="biomarker-item">
+                <div class="biomarker-label">Waist Circumference</div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="task-action-button" onclick="event.stopPropagation(); openModal('waistModal')">Add</button>
+                  <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissBiomarkerItem(this)">×</button>
+                </div>
+              </div>
+              <div class="biomarker-item">
+                <div class="biomarker-label">Ketones</div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="task-action-button" onclick="event.stopPropagation(); openModal('ketonesModal')">Add</button>
+                  <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissBiomarkerItem(this)">×</button>
+                </div>
+              </div>
+              <div class="biomarker-item">
+                <div class="biomarker-label">Blood Pressure/Heart Rate</div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="task-action-button" onclick="event.stopPropagation(); openModal('bloodPressureModal')">Add</button>
+                  <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissBiomarkerItem(this)">×</button>
+                </div>
+              </div>
             </div>
-            <div class="task-description">Log how you're feeling</div>
           </div>
         </div>
 
         <!-- Nutrition Goals -->
-        <div class="task-card completed" onclick="toggleTaskDetail(this)">
-          <div class="task-checkbox checked" onclick="event.stopPropagation(); toggleTask(this)"></div>
-          <div class="task-main">
-            <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            <div class="task-detail">
-              <div class="detail-progress">
-                <div class="progress-label">Today: 12g / 30g carbs</div>
-                <div class="progress-bar-container">
-                  <div class="progress-bar" style="width: 40%;"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div class="task-card" onclick="toggleTaskDetail(this)">
           <div class="task-checkbox" onclick="event.stopPropagation(); toggleTask(this)"></div>
           <div class="task-main">
-            <div class="task-title">Ate 120 Grams of Protein</div>
+            <div class="task-header-row">
+              <div class="task-title">Log Food</div>
+              <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
+            </div>
             <div class="task-detail">
               <div class="detail-progress">
-                <div class="progress-label">Today: 45g / 120g protein</div>
+                <div class="progress-header">
+                  <div class="progress-label">Protein: 85g / 120g</div>
+                  <button class="task-action-button compact" onclick="event.stopPropagation(); showFoodLoggingMessage();">Add</button>
+                </div>
                 <div class="progress-bar-container">
-                  <div class="progress-bar" style="width: 37.5%;"></div>
+                  <div class="progress-bar" style="width: 70.8%; background: var(--color-turquoise);"></div>
+                  <div class="progress-goal-notch" style="left: 100%;"></div>
+                </div>
+              </div>
+              <div class="detail-progress" style="margin-top: 12px;">
+                <div class="progress-header">
+                  <div class="progress-label">Carbs: 18g / 30g</div>
+                  <button class="task-action-button compact" onclick="event.stopPropagation(); showFoodLoggingMessage();">Add</button>
+                </div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar" style="width: 60%; background: var(--color-turquoise);"></div>
+                  <div class="progress-goal-notch" style="left: 100%;"></div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="task-card completed">
-          <div class="task-checkbox checked" onclick="toggleTask(this)"></div>
-          <div class="task-main">
-            <div class="task-title">Followed The Nutrition Plan's Food List</div>
           </div>
         </div>
         </div>
@@ -1376,23 +1540,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+              <div class="task-header-row">
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1415,23 +1568,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+              <div class="task-header-row">
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1453,23 +1595,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+              <div class="task-header-row">
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1491,23 +1622,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+              <div class="task-header-row">
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1529,23 +1649,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+              <div class="task-header-row">
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1567,23 +1676,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+              <div class="task-header-row">
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1606,34 +1704,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox disabled"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
-                <div class="task-title">Weekly Weigh-In</div>
-                <button class="task-action-button">Enter</button>
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
-              <div class="task-description">Record your weight</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
             </div>
           </div>
         </div>
@@ -1655,23 +1731,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+              <div class="task-header-row">
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1702,23 +1767,12 @@
           </div>
 
           <div class="task-card">
-            <div class="task-checkbox"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+              <div class="task-header-row">
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1740,23 +1794,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+              <div class="task-header-row">
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1778,23 +1821,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+              <div class="task-header-row">
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1816,23 +1848,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+              <div class="task-header-row">
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1856,34 +1877,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox disabled"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
-                <div class="task-title">Weekly Weigh-In</div>
-                <button class="task-action-button">Enter</button>
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
-              <div class="task-description">Record your weight</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
             </div>
           </div>
         </div>
@@ -1933,23 +1932,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+              <div class="task-header-row">
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1980,23 +1968,12 @@
           </div>
 
           <div class="task-card">
-            <div class="task-checkbox"></div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
-              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Ate 120 Grams of Protein</div>
-            </div>
-          </div>
-
-          <div class="task-card">
-            <div class="task-checkbox"></div>
-            <div class="task-main">
-              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+              <div class="task-header-row">
+                <div class="task-title">Log Food</div>
+                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
+              </div>
             </div>
           </div>
         </div>
@@ -2088,7 +2065,7 @@
     <div class="modal-overlay" id="weightModal">
       <div class="weight-input-modal">
         <div class="modal-header">
-          <h2 class="modal-title">Weekly Weigh-In</h2>
+          <h2 class="modal-title">Record Weight</h2>
           <button class="modal-close" onclick="closeWeightInput()">✕</button>
         </div>
 
@@ -2131,6 +2108,96 @@
       </div>
     </div>
 
+    <!-- General Symptoms Modal -->
+    <div class="modal-overlay" id="symptomsModal">
+      <div class="symptoms-modal">
+        <div class="modal-header">
+          <h2 class="modal-title">General Symptoms</h2>
+          <button class="modal-close" onclick="closeSymptomsModal()">✕</button>
+        </div>
+
+        <div class="symptoms-content">
+          <div class="symptom-group">
+            <h3 class="symptom-label">Energy</h3>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="energy" value="high">
+                <span class="radio-label">High</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="energy" value="medium">
+                <span class="radio-label">Medium</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="energy" value="low">
+                <span class="radio-label">Low</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="energy" value="very-low">
+                <span class="radio-label">Very Low</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="symptom-group">
+            <h3 class="symptom-label">Mood</h3>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="mood" value="great">
+                <span class="radio-label">Great</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="mood" value="good">
+                <span class="radio-label">Good</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="mood" value="ok">
+                <span class="radio-label">OK</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="mood" value="bad">
+                <span class="radio-label">Bad</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <button class="save-symptoms-button" onclick="saveSymptoms()">
+          Save
+        </button>
+      </div>
+    </div>
+
+    <!-- Waist Circumference Modal -->
+    <div class="modal-overlay center" id="waistModal">
+      <div class="coming-soon-modal">
+        <div class="coming-soon-icon">🚀</div>
+        <h2 class="coming-soon-title">Coming Soon</h2>
+        <p class="coming-soon-text">This feature is currently under development and will be available soon.</p>
+        <button class="coming-soon-button" onclick="closeModal('waistModal')">Got It</button>
+      </div>
+    </div>
+
+    <!-- Ketones Modal -->
+    <div class="modal-overlay center" id="ketonesModal">
+      <div class="coming-soon-modal">
+        <div class="coming-soon-icon">🚀</div>
+        <h2 class="coming-soon-title">Coming Soon</h2>
+        <p class="coming-soon-text">This feature is currently under development and will be available soon.</p>
+        <button class="coming-soon-button" onclick="closeModal('ketonesModal')">Got It</button>
+      </div>
+    </div>
+
+    <!-- Blood Pressure/Heart Rate Modal -->
+    <div class="modal-overlay center" id="bloodPressureModal">
+      <div class="coming-soon-modal">
+        <div class="coming-soon-icon">🚀</div>
+        <h2 class="coming-soon-title">Coming Soon</h2>
+        <p class="coming-soon-text">This feature is currently under development and will be available soon.</p>
+        <button class="coming-soon-button" onclick="closeModal('bloodPressureModal')">Got It</button>
+      </div>
+    </div>
+
     <!-- Bottom Navigation -->
     <div class="bottom-nav">
       <button class="nav-item active">
@@ -2142,7 +2209,7 @@
             <line x1="3" y1="10" x2="21" y2="10"/>
           </svg>
         </div>
-        <div class="nav-label">To-Do</div>
+        <div class="nav-label">To Do</div>
       </button>
       <button class="nav-item">
         <div class="nav-icon">
@@ -2309,6 +2376,36 @@
       }
     }
 
+    // Task dismissal
+    function dismissTask(button) {
+      const taskCard = button.closest('.task-card');
+      if (taskCard) {
+        taskCard.style.transition = 'opacity 0.3s ease, max-height 0.3s ease, margin 0.3s ease';
+        taskCard.style.opacity = '0';
+        taskCard.style.maxHeight = '0';
+        taskCard.style.marginBottom = '0';
+        taskCard.style.overflow = 'hidden';
+        setTimeout(() => {
+          taskCard.remove();
+        }, 300);
+      }
+    }
+
+    // Biomarker item dismissal
+    function dismissBiomarkerItem(button) {
+      const biomarkerItem = button.closest('.biomarker-item');
+      if (biomarkerItem) {
+        biomarkerItem.style.transition = 'opacity 0.3s ease, max-height 0.3s ease, padding 0.3s ease';
+        biomarkerItem.style.opacity = '0';
+        biomarkerItem.style.maxHeight = '0';
+        biomarkerItem.style.padding = '0';
+        biomarkerItem.style.overflow = 'hidden';
+        setTimeout(() => {
+          biomarkerItem.remove();
+        }, 300);
+      }
+    }
+
     // Date section collapse/expand
     function toggleDateSection(header) {
       const section = header.closest('.date-section');
@@ -2330,28 +2427,35 @@
       // Filter content
       const sections = document.querySelectorAll('.date-section');
 
-      if (filter === 'all') {
-        // Show all sections including daily-only
-        sections.forEach(s => {
-          s.style.display = 'block';
-        });
-      } else if (filter === 'appointments') {
+      if (filter === 'appointments') {
         // Show only appointments, hide daily-only and others
         sections.forEach(s => {
           const hasAppointment = s.querySelector('.indicator-dot.coaching') !== null;
           s.style.display = hasAppointment ? 'block' : 'none';
+          // Collapse all sections first
+          s.classList.add('collapsed');
         });
       } else if (filter === 'biomarkers') {
         // Show only labs, hide daily-only and others
         sections.forEach(s => {
           const hasLabs = s.querySelector('.indicator-dot.labs') !== null;
           s.style.display = hasLabs ? 'block' : 'none';
+          // Collapse all sections first
+          s.classList.add('collapsed');
         });
       } else if (filter === 'nutrition') {
         // Show all sections including daily-only (all have tasks)
         sections.forEach(s => {
           s.style.display = 'block';
+          // Collapse all sections first
+          s.classList.add('collapsed');
         });
+      }
+
+      // Open the first visible section
+      const firstVisible = Array.from(sections).find(s => s.style.display !== 'none');
+      if (firstVisible) {
+        firstVisible.classList.remove('collapsed');
       }
     }
 
@@ -2368,11 +2472,75 @@
       document.body.style.overflow = '';
     }
 
+    // Symptoms modal functions
+    function openSymptomsModal() {
+      const modal = document.getElementById('symptomsModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSymptomsModal() {
+      const modal = document.getElementById('symptomsModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      // Reset radio buttons
+      document.querySelectorAll('#symptomsModal input[type="radio"]').forEach(radio => {
+        radio.checked = false;
+      });
+    }
+
+    function saveSymptoms() {
+      const energy = document.querySelector('input[name="energy"]:checked');
+      const mood = document.querySelector('input[name="mood"]:checked');
+
+      if (energy && mood) {
+        console.log('Symptoms saved:', {
+          energy: energy.value,
+          mood: mood.value
+        });
+        closeSymptomsModal();
+      } else {
+        alert('Please select both energy and mood levels');
+      }
+    }
+
+    // Food logging message
+    function showFoodLoggingMessage() {
+      alert('Goes to food logging screen');
+    }
+
+    // Generic modal functions
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
     // Close modal when clicking overlay
     document.getElementById('comingSoonModal').addEventListener('click', function(e) {
       if (e.target === this) {
         closeComingSoon();
       }
+    });
+
+    document.getElementById('symptomsModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeSymptomsModal();
+      }
+    });
+
+    ['waistModal', 'ketonesModal', 'bloodPressureModal'].forEach(modalId => {
+      document.getElementById(modalId).addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeModal(modalId);
+        }
+      });
     });
 
     // Bottom navigation

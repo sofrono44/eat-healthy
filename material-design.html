@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <title>Revero - Plan (Material Design)</title>
+
+  <!-- Roboto Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style>
+    /* Material Design 3 Tokens - Revero Color System */
+    :root {
+      /* Primary (Turquoise) */
+      --md-sys-color-primary: #3DB6CE;
+      --md-sys-color-on-primary: #FFFFFF;
+      --md-sys-color-primary-container: #C6EFF5;
+      --md-sys-color-on-primary-container: #175E6F;
+
+      /* Secondary (Mint Green - Success) */
+      --md-sys-color-secondary: #88CC66;
+      --md-sys-color-on-secondary: #FFFFFF;
+      --md-sys-color-secondary-container: #E8F3D4;
+      --md-sys-color-on-secondary-container: #357422;
+
+      /* Tertiary (Purple) */
+      --md-sys-color-tertiary: #8B5FA0;
+      --md-sys-color-on-tertiary: #FFFFFF;
+      --md-sys-color-tertiary-container: #E9E0EE;
+      --md-sys-color-on-tertiary-container: #3D2347;
+
+      /* Error (Red/Pink) */
+      --md-sys-color-error: #EF8A8A;
+      --md-sys-color-on-error: #FFFFFF;
+      --md-sys-color-error-container: #FEF0F0;
+      --md-sys-color-on-error-container: #5A1F1F;
+
+      /* Warning (Cyan - Custom) */
+      --md-sys-color-warning: #5BC5D9;
+      --md-sys-color-on-warning: #FFFFFF;
+      --md-sys-color-warning-container: #E8F8FB;
+      --md-sys-color-on-warning-container: #0D3D48;
+
+      /* Background */
+      --md-sys-color-background: #F7F8FA;
+      --md-sys-color-on-background: #2C3E50;
+
+      /* Surface */
+      --md-sys-color-surface: #FFFFFF;
+      --md-sys-color-on-surface: #2C3E50;
+      --md-sys-color-surface-variant: #F7F8FA;
+      --md-sys-color-on-surface-variant: #556175;
+      --md-sys-color-surface-dim: #D1D5DB;
+      --md-sys-color-surface-bright: #F7F8FA;
+
+      /* Outline */
+      --md-sys-color-outline: #E5E7EB;
+      --md-sys-color-outline-variant: #F7F8FA;
+
+      /* Inverse */
+      --md-sys-color-inverse-surface: #2C3E50;
+      --md-sys-color-inverse-on-surface: #FFFFFF;
+      --md-sys-color-inverse-primary: #77DBE7;
+
+      /* Other */
+      --md-sys-color-surface-tint: #3DB6CE;
+      --md-sys-color-scrim: rgba(0, 0, 0, 0.32);
+      --md-sys-color-shadow: #000000;
+
+      /* Elevation Levels */
+      --md-sys-elevation-0: none;
+      --md-sys-elevation-1: 0px 1px 2px 0px rgba(0, 0, 0, 0.3),
+                             0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      --md-sys-elevation-2: 0px 2px 4px 0px rgba(0, 0, 0, 0.3),
+                             0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+      --md-sys-elevation-3: 0px 4px 6px 0px rgba(0, 0, 0, 0.3),
+                             0px 6px 12px 5px rgba(0, 0, 0, 0.15);
+      --md-sys-elevation-4: 0px 6px 10px 0px rgba(0, 0, 0, 0.3),
+                             0px 8px 16px 6px rgba(0, 0, 0, 0.15);
+      --md-sys-elevation-5: 0px 8px 12px 0px rgba(0, 0, 0, 0.3),
+                             0px 12px 24px 9px rgba(0, 0, 0, 0.15);
+
+      /* Shape (Corner Radius) */
+      --md-sys-shape-corner-none: 0px;
+      --md-sys-shape-corner-extra-small: 4px;
+      --md-sys-shape-corner-small: 8px;
+      --md-sys-shape-corner-medium: 12px;
+      --md-sys-shape-corner-large: 16px;
+      --md-sys-shape-corner-extra-large: 28px;
+      --md-sys-shape-corner-full: 9999px;
+
+      /* Spacing (4dp grid) */
+      --md-sys-spacing-1: 4px;
+      --md-sys-spacing-2: 8px;
+      --md-sys-spacing-3: 12px;
+      --md-sys-spacing-4: 16px;
+      --md-sys-spacing-6: 24px;
+      --md-sys-spacing-8: 32px;
+      --md-sys-spacing-12: 48px;
+
+      /* Motion */
+      --md-sys-motion-duration-short: 150ms;
+      --md-sys-motion-duration-medium: 280ms;
+      --md-sys-motion-duration-long: 300ms;
+      --md-sys-motion-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+      --md-sys-motion-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
+      --md-sys-motion-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
+
+      /* Typography */
+      --md-sys-typescale-brand-font-family: 'Roboto', sans-serif;
+    }
+
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--md-sys-typescale-brand-font-family);
+      background: var(--md-sys-color-background);
+      color: var(--md-sys-color-on-background);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Mobile container */
+    .mobile-frame {
+      max-width: 375px;
+      margin: 0 auto;
+      background: var(--md-sys-color-background);
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Status bar */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--md-sys-spacing-2) var(--md-sys-spacing-4);
+      background: var(--md-sys-color-surface);
+      color: var(--md-sys-color-on-surface);
+      font-size: 14px;
+      font-weight: 500;
+      height: 30px;
+    }
+
+    .status-icons {
+      display: flex;
+      gap: var(--md-sys-spacing-2);
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .signal-bars {
+      display: flex;
+      gap: 2px;
+      align-items: flex-end;
+      height: 14px;
+    }
+
+    .signal-bar {
+      width: 3px;
+      background: var(--md-sys-color-on-surface);
+      border-radius: 1px;
+    }
+
+    .signal-bar:nth-child(1) { height: 4px; }
+    .signal-bar:nth-child(2) { height: 7px; }
+    .signal-bar:nth-child(3) { height: 10px; }
+    .signal-bar:nth-child(4) { height: 13px; }
+
+    /* Top App Bar */
+    .top-app-bar {
+      background-color: var(--md-sys-color-surface);
+      color: var(--md-sys-color-on-surface);
+      padding: var(--md-sys-spacing-3) var(--md-sys-spacing-4);
+      box-shadow: var(--md-sys-elevation-2);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .app-bar__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--md-sys-spacing-3);
+    }
+
+    .app-bar__title {
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 28px;
+      letter-spacing: 0px;
+    }
+
+    .md-icon-button {
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      border-radius: var(--md-sys-shape-corner-full);
+      background-color: transparent;
+      color: var(--md-sys-color-on-surface-variant);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+    }
+
+    .md-icon-button:hover {
+      background-color: rgba(44, 62, 80, 0.08);
+    }
+
+    .md-icon-button:active {
+      background-color: rgba(44, 62, 80, 0.12);
+    }
+
+    .material-icons {
+      font-size: 24px;
+    }
+
+    /* Tabs (Filter Pills) */
+    .md-tabs {
+      display: flex;
+      gap: var(--md-sys-spacing-2);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      margin-top: var(--md-sys-spacing-2);
+    }
+
+    .md-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .md-chip {
+      height: 32px;
+      padding: 0 var(--md-sys-spacing-4);
+      background-color: transparent;
+      border: 1px solid var(--md-sys-color-outline);
+      border-radius: var(--md-sys-shape-corner-small);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.1px;
+      color: var(--md-sys-color-on-surface-variant);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      transition: all var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+    }
+
+    .md-chip:hover {
+      background-color: rgba(44, 62, 80, 0.08);
+    }
+
+    .md-chip--selected {
+      background-color: var(--md-sys-color-secondary-container);
+      border-color: var(--md-sys-color-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
+    }
+
+    /* Content area */
+    .content-area {
+      padding: var(--md-sys-spacing-4);
+      padding-bottom: 96px;
+    }
+
+    /* Banner Card */
+    .banner-card {
+      background: linear-gradient(135deg, #FFE9A3 0%, #FFD64B 100%);
+      border-radius: var(--md-sys-shape-corner-medium);
+      padding: var(--md-sys-spacing-4);
+      margin-bottom: var(--md-sys-spacing-4);
+      box-shadow: var(--md-sys-elevation-1);
+      display: flex;
+      align-items: center;
+      gap: var(--md-sys-spacing-3);
+      color: var(--md-sys-color-on-background);
+    }
+
+    .banner-card__icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: var(--md-sys-shape-corner-small);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .banner-card__content {
+      flex: 1;
+    }
+
+    .banner-card__title {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      margin-bottom: 2px;
+    }
+
+    .banner-card__subtitle {
+      font-size: 12px;
+      line-height: 16px;
+      opacity: 0.8;
+    }
+
+    .banner-card__close {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: rgba(0, 0, 0, 0.08);
+      border-radius: var(--md-sys-shape-corner-small);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+    }
+
+    .banner-card__close:hover {
+      background: rgba(0, 0, 0, 0.12);
+    }
+
+    .banner-card.hidden {
+      display: none;
+    }
+
+    /* Date Sections */
+    .date-section {
+      margin-bottom: var(--md-sys-spacing-3);
+      background: var(--md-sys-color-surface);
+      border-radius: var(--md-sys-shape-corner-medium);
+      overflow: hidden;
+      box-shadow: var(--md-sys-elevation-1);
+      transition: box-shadow var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+    }
+
+    .date-section:hover {
+      box-shadow: var(--md-sys-elevation-2);
+    }
+
+    .date-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--md-sys-spacing-4);
+      cursor: pointer;
+      user-select: none;
+      transition: background-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+    }
+
+    .date-header:hover {
+      background-color: rgba(44, 62, 80, 0.04);
+    }
+
+    .date-header:active {
+      background-color: rgba(44, 62, 80, 0.08);
+    }
+
+    .date-header-left {
+      display: flex;
+      align-items: center;
+      gap: var(--md-sys-spacing-2);
+    }
+
+    .chevron-icon {
+      width: 24px;
+      height: 24px;
+      transition: transform var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+    }
+
+    .date-section.collapsed .chevron-icon {
+      transform: rotate(-90deg);
+    }
+
+    .date-label {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: 0.15px;
+      color: var(--md-sys-color-on-surface);
+    }
+
+    .date-indicators {
+      display: flex;
+      gap: var(--md-sys-spacing-2);
+    }
+
+    .indicator-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .indicator-dot.tasks {
+      background: #2A8A9E;
+    }
+
+    .indicator-dot.tasks.unfilled {
+      background: transparent;
+      border: 2px solid #2A8A9E;
+    }
+
+    .indicator-dot.weigh {
+      background: #BD9B00;
+    }
+
+    .indicator-dot.weigh.unfilled {
+      background: transparent;
+      border: 2px solid #BD9B00;
+    }
+
+    .indicator-dot.labs {
+      background: #E8538B;
+    }
+
+    .indicator-dot.labs.unfilled {
+      background: transparent;
+      border: 2px solid #E8538B;
+    }
+
+    .indicator-dot.coaching {
+      background: #6F4A80;
+    }
+
+    .indicator-dot.coaching.unfilled {
+      background: transparent;
+      border: 2px solid #6F4A80;
+    }
+
+    .indicator-dot.note {
+      background: #D77A0F;
+    }
+
+    .indicator-dot.note.unfilled {
+      background: transparent;
+      border: 2px solid #D77A0F;
+    }
+
+    /* Task Cards Container */
+    .task-cards-container {
+      max-height: 2000px;
+      overflow: hidden;
+      transition: max-height var(--md-sys-motion-duration-long) var(--md-sys-motion-easing-decelerate);
+      border-top: 1px solid var(--md-sys-color-outline);
+    }
+
+    .date-section.collapsed .task-cards-container {
+      max-height: 0;
+      border-top: none;
+    }
+
+    /* Task Card (List Item) */
+    .task-card {
+      min-height: 56px;
+      padding: var(--md-sys-spacing-2) var(--md-sys-spacing-4);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--md-sys-spacing-4);
+      border-bottom: 1px solid var(--md-sys-color-outline);
+      transition: background-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+    }
+
+    .task-card:last-child {
+      border-bottom: none;
+    }
+
+    .task-card:hover {
+      background-color: rgba(44, 62, 80, 0.04);
+    }
+
+    .task-card.completed {
+      opacity: 0.7;
+    }
+
+    .task-checkbox {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--md-sys-color-outline);
+      border-radius: var(--md-sys-shape-corner-extra-small);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 8px;
+      cursor: pointer;
+      transition: all var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+    }
+
+    .task-checkbox:hover {
+      border-color: var(--md-sys-color-primary);
+      background-color: rgba(61, 182, 206, 0.04);
+    }
+
+    .task-checkbox.checked {
+      background: var(--md-sys-color-secondary);
+      border-color: var(--md-sys-color-secondary);
+    }
+
+    .task-checkbox.checked::after {
+      content: '\2713';
+      color: var(--md-sys-color-on-secondary);
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .task-checkbox.disabled {
+      cursor: not-allowed;
+      opacity: 0.38;
+    }
+
+    .task-main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .task-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--md-sys-spacing-3);
+      margin-bottom: var(--md-sys-spacing-1);
+    }
+
+    .task-title {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+      color: var(--md-sys-color-on-surface);
+      flex: 1;
+    }
+
+    .md-filled-button {
+      height: 40px;
+      padding: 0 var(--md-sys-spacing-6);
+      border-radius: var(--md-sys-shape-corner-full);
+      background-color: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.1px;
+      border: none;
+      cursor: pointer;
+      transition: all var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+      box-shadow: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .md-filled-button:hover {
+      box-shadow: var(--md-sys-elevation-1);
+      background-color: #2A8A9E;
+    }
+
+    .md-filled-button:active {
+      box-shadow: none;
+    }
+
+    .task-description {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.25px;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-bottom: var(--md-sys-spacing-2);
+    }
+
+    /* Bottom Navigation Bar */
+    .md-navigation-bar {
+      height: 80px;
+      background-color: var(--md-sys-color-surface);
+      box-shadow: var(--md-sys-elevation-2);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-width: 375px;
+      margin: 0 auto;
+      z-index: 10;
+    }
+
+    .md-navigation-item {
+      flex: 1;
+      height: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--md-sys-spacing-1);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--md-sys-color-on-surface-variant);
+      transition: color var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+      position: relative;
+      border-radius: var(--md-sys-shape-corner-medium);
+    }
+
+    .md-navigation-item__icon {
+      width: 64px;
+      height: 32px;
+      border-radius: var(--md-sys-shape-corner-medium);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+    }
+
+    .md-navigation-item__label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .md-navigation-item:hover .md-navigation-item__icon {
+      background-color: rgba(61, 182, 206, 0.08);
+    }
+
+    .md-navigation-item--active {
+      color: var(--md-sys-color-on-surface);
+    }
+
+    .md-navigation-item--active .md-navigation-item__icon {
+      background-color: var(--md-sys-color-secondary-container);
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--md-sys-color-scrim);
+      display: none;
+      align-items: flex-end;
+      z-index: 200;
+      animation: fadeIn var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-decelerate);
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-overlay.center {
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Coming Soon Modal */
+    .coming-soon-modal {
+      background: var(--md-sys-color-surface);
+      border-radius: var(--md-sys-shape-corner-extra-large);
+      width: 90%;
+      max-width: 320px;
+      margin: auto;
+      padding: var(--md-sys-spacing-8) var(--md-sys-spacing-6);
+      text-align: center;
+      box-shadow: var(--md-sys-elevation-4);
+      animation: scaleIn var(--md-sys-motion-duration-long) var(--md-sys-motion-easing-decelerate);
+    }
+
+    .coming-soon-icon {
+      font-size: 48px;
+      margin-bottom: var(--md-sys-spacing-4);
+    }
+
+    .coming-soon-title {
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 32px;
+      color: var(--md-sys-color-on-surface);
+      margin-bottom: var(--md-sys-spacing-2);
+    }
+
+    .coming-soon-text {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0.25px;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-bottom: var(--md-sys-spacing-6);
+    }
+
+    .coming-soon-button {
+      width: 100%;
+      height: 40px;
+      border-radius: var(--md-sys-shape-corner-full);
+      background: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.1px;
+      cursor: pointer;
+      transition: all var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+    }
+
+    .coming-soon-button:hover {
+      box-shadow: var(--md-sys-elevation-1);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (min-width: 376px) {
+      .mobile-frame {
+        max-width: 100%;
+      }
+
+      .md-navigation-bar {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span>10:00</span>
+      <div class="status-icons">
+        <div class="signal-bars">
+          <div class="signal-bar"></div>
+          <div class="signal-bar"></div>
+          <div class="signal-bar"></div>
+          <div class="signal-bar"></div>
+        </div>
+        <span>LTE</span>
+        <span>100%</span>
+      </div>
+    </div>
+
+    <!-- Top App Bar -->
+    <div class="top-app-bar">
+      <div class="app-bar__header">
+        <h1 class="app-bar__title">To-Do</h1>
+        <button class="md-icon-button">
+          <span class="material-icons">account_circle</span>
+        </button>
+      </div>
+
+      <!-- Tabs (Filter Pills) -->
+      <div class="md-tabs">
+        <button class="md-chip md-chip--selected" onclick="setFilter('nutrition')">Tasks</button>
+        <button class="md-chip" onclick="setFilter('appointments')">Appointments</button>
+        <button class="md-chip" onclick="setFilter('biomarkers')">Labs</button>
+        <button class="md-chip" onclick="setFilter('all')">All</button>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+      <!-- Reminder Banner -->
+      <div class="banner-card" id="reminderBanner">
+        <div class="banner-card__icon">
+          <span class="material-icons">science</span>
+        </div>
+        <div class="banner-card__content">
+          <div class="banner-card__title">Reminder - labs due in 11 days</div>
+        </div>
+        <button class="banner-card__close" onclick="dismissReminder()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+
+      <!-- Today Section -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Today</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks"></div>
+            <div class="indicator-dot weigh unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox disabled"></div>
+            <div class="task-main">
+              <div class="task-header-row">
+                <div class="task-title">Weekly Weigh-In</div>
+                <button class="md-filled-button">Enter</button>
+              </div>
+              <div class="task-description">Record your weight</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox disabled"></div>
+            <div class="task-main">
+              <div class="task-header-row">
+                <div class="task-title">General Symptoms</div>
+                <button class="md-filled-button">Enter</button>
+              </div>
+              <div class="task-description">Log how you're feeling</div>
+            </div>
+          </div>
+
+          <div class="task-card completed">
+            <div class="task-checkbox checked" onclick="toggleTask(this)"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card completed">
+            <div class="task-checkbox checked" onclick="toggleTask(this)"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tomorrow Section -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Monday, Nov 17</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tuesday Section -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Tuesday, Nov 18</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+            <div class="indicator-dot note unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wednesday, Nov 19 -->
+      <div class="date-section collapsed daily-only">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Wednesday, Nov 19</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thursday, Nov 20 -->
+      <div class="date-section collapsed daily-only">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Thursday, Nov 20</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Friday, Nov 21 -->
+      <div class="date-section collapsed daily-only">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Friday, Nov 21</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saturday, Nov 22 -->
+      <div class="date-section collapsed daily-only">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Saturday, Nov 22</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saturday Section (Nov 23 - with weigh-in) -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Saturday, Nov 23</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+            <div class="indicator-dot weigh unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox disabled"></div>
+            <div class="task-main">
+              <div class="task-header-row">
+                <div class="task-title">Weekly Weigh-In</div>
+                <button class="md-filled-button">Enter</button>
+              </div>
+              <div class="task-description">Record your weight</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sunday, Nov 24 -->
+      <div class="date-section collapsed daily-only">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Sunday, Nov 24</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Monday Nov 25 Section (Coaching) -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Monday, Nov 25</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+            <div class="indicator-dot coaching unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Coaching Session</div>
+              <div class="task-description">10:00 AM - Video call with your coach</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tuesday, Nov 26 -->
+      <div class="date-section collapsed daily-only">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Tuesday, Nov 26</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wednesday, Nov 27 -->
+      <div class="date-section collapsed daily-only">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Wednesday, Nov 27</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thursday, Nov 28 -->
+      <div class="date-section collapsed daily-only">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Thursday, Nov 28</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Friday Nov 29 Section -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Friday, Nov 29</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+            <div class="indicator-dot weigh unfilled"></div>
+            <div class="indicator-dot note unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox disabled"></div>
+            <div class="task-main">
+              <div class="task-header-row">
+                <div class="task-title">Weekly Weigh-In</div>
+                <button class="md-filled-button">Enter</button>
+              </div>
+              <div class="task-description">Record your weight</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saturday Nov 30 - 3 Month Labs -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Saturday, Nov 30</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot labs unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox disabled"></div>
+            <div class="task-main">
+              <div class="task-header-row">
+                <div class="task-title">3 Month Labs</div>
+                <button class="md-filled-button">Schedule</button>
+              </div>
+              <div class="task-description">Complete your 3-month lab work</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sunday, Dec 1 -->
+      <div class="date-section collapsed daily-only">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Sunday, Dec 1</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Monday Dec 2 Section -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Monday, Dec 2</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot tasks unfilled"></div>
+            <div class="indicator-dot coaching unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Coaching Session</div>
+              <div class="task-description">10:00 AM - Video call with your coach</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thursday Dec 12 Section -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Thursday, Dec 12</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot coaching unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Physician Consultation</div>
+              <div class="task-description">2:00 PM - Video call with Dr. Smith</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sunday Mar 2, 2026 - 6 Month Labs -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Sunday, Mar 2, 2026</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot labs unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox disabled"></div>
+            <div class="task-main">
+              <div class="task-header-row">
+                <div class="task-title">6 Month Labs</div>
+                <button class="md-filled-button">Schedule</button>
+              </div>
+              <div class="task-description">Complete your 6-month lab work</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Monday Jun 2, 2026 - 12 Month Labs -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <span class="material-icons chevron-icon">expand_more</span>
+            <div class="date-label">Monday, Jun 2, 2026</div>
+          </div>
+          <div class="date-indicators">
+            <div class="indicator-dot labs unfilled"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox disabled"></div>
+            <div class="task-main">
+              <div class="task-header-row">
+                <div class="task-title">12 Month Labs</div>
+                <button class="md-filled-button">Schedule</button>
+              </div>
+              <div class="task-description">Complete your 12-month lab work</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coming Soon Modal -->
+    <div class="modal-overlay center" id="comingSoonModal">
+      <div class="coming-soon-modal">
+        <div class="coming-soon-icon">🚀</div>
+        <h2 class="coming-soon-title">Coming Soon</h2>
+        <p class="coming-soon-text">This feature is currently under development and will be available soon.</p>
+        <button class="coming-soon-button" onclick="closeComingSoon()">Got It</button>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="md-navigation-bar">
+      <button class="md-navigation-item md-navigation-item--active">
+        <span class="md-navigation-item__icon">
+          <span class="material-icons">event</span>
+        </span>
+        <span class="md-navigation-item__label">To-Do</span>
+      </button>
+      <button class="md-navigation-item">
+        <span class="md-navigation-item__icon">
+          <span class="material-icons">favorite</span>
+        </span>
+        <span class="md-navigation-item__label">Health</span>
+      </button>
+      <button class="md-navigation-item">
+        <span class="md-navigation-item__icon">
+          <span class="material-icons">school</span>
+        </span>
+        <span class="md-navigation-item__label">Learn</span>
+      </button>
+      <button class="md-navigation-item">
+        <span class="md-navigation-item__icon">
+          <span class="material-icons">assessment</span>
+        </span>
+        <span class="md-navigation-item__label">Reports</span>
+      </button>
+      <button class="md-navigation-item">
+        <span class="md-navigation-item__icon">
+          <span class="material-icons">more_horiz</span>
+        </span>
+        <span class="md-navigation-item__label">More</span>
+      </button>
+    </nav>
+  </div>
+
+  <script>
+    // Dismiss reminder banner
+    function dismissReminder() {
+      const banner = document.getElementById('reminderBanner');
+      banner.classList.add('hidden');
+    }
+
+    // Task toggling
+    function toggleTask(checkbox) {
+      checkbox.classList.toggle('checked');
+      const card = checkbox.closest('.task-card');
+      if (card) {
+        card.classList.toggle('completed');
+      }
+    }
+
+    // Date section collapse/expand
+    function toggleDateSection(header) {
+      const section = header.closest('.date-section');
+      section.classList.toggle('collapsed');
+    }
+
+    // Filter functionality
+    let currentFilter = 'nutrition';
+
+    function setFilter(filter) {
+      currentFilter = filter;
+
+      // Update active chip
+      document.querySelectorAll('.md-chip').forEach(chip => {
+        chip.classList.remove('md-chip--selected');
+      });
+      event.target.classList.add('md-chip--selected');
+
+      // Filter content
+      const sections = document.querySelectorAll('.date-section');
+
+      if (filter === 'all') {
+        sections.forEach(s => {
+          s.style.display = 'block';
+        });
+      } else if (filter === 'appointments') {
+        sections.forEach(s => {
+          const hasAppointment = s.querySelector('.indicator-dot.coaching') !== null;
+          s.style.display = hasAppointment ? 'block' : 'none';
+        });
+      } else if (filter === 'biomarkers') {
+        sections.forEach(s => {
+          const hasLabs = s.querySelector('.indicator-dot.labs') !== null;
+          s.style.display = hasLabs ? 'block' : 'none';
+        });
+      } else if (filter === 'nutrition') {
+        sections.forEach(s => {
+          s.style.display = 'block';
+        });
+      }
+    }
+
+    // Coming Soon modal
+    function openComingSoon() {
+      const modal = document.getElementById('comingSoonModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeComingSoon() {
+      const modal = document.getElementById('comingSoonModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close modal when clicking overlay
+    document.getElementById('comingSoonModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeComingSoon();
+      }
+    });
+
+    // Bottom navigation
+    document.querySelectorAll('.md-navigation-item').forEach((item, index) => {
+      item.addEventListener('click', function() {
+        // If not the To-Do tab (index 0), show coming soon
+        if (index !== 0) {
+          openComingSoon();
+          return;
+        }
+
+        document.querySelectorAll('.md-navigation-item').forEach(i => i.classList.remove('md-navigation-item--active'));
+        this.classList.add('md-navigation-item--active');
+      });
+    });
+  </script>
+</body>
+</html>
