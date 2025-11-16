@@ -314,12 +314,47 @@
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
 
+    /* Collapsible sections */
+    .date-section.collapsed .task-cards-container {
+      max-height: 0;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+
+    .task-cards-container {
+      max-height: 2000px;
+      overflow: hidden;
+      transition: max-height 300ms ease;
+    }
+
     .date-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 12px;
       padding: 8px 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .date-header:active {
+      opacity: 0.7;
+    }
+
+    .date-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chevron-icon {
+      width: 20px;
+      height: 20px;
+      transition: transform 200ms ease;
+    }
+
+    .date-section.collapsed .chevron-icon {
+      transform: rotate(-90deg);
     }
 
     .date-label {
@@ -1155,8 +1190,11 @@
     <div class="calendar-list" id="calendarList">
       <!-- Today Section -->
       <div class="date-section focus-card">
-        <div class="date-header">
-          <div>
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
             <div class="date-label">Today</div>
           </div>
           <div class="date-indicators">
@@ -1165,6 +1203,7 @@
           </div>
         </div>
 
+        <div class="task-cards-container">
         <!-- Weekly Weigh-in -->
         <div class="task-card">
           <div class="task-checkbox disabled"></div>
@@ -1226,108 +1265,302 @@
             <div class="task-title">Followed The Nutrition Plan's Food List</div>
           </div>
         </div>
+        </div>
       </div>
 
-      <!-- Tomorrow Section - Compact -->
-      <div class="date-section">
-        <div class="date-header">
-          <div class="date-label">Tomorrow, Monday Nov 17</div>
-        </div>
-
-        <div class="date-row-compact">
-          <div class="date-label">Daily tasks</div>
+      <!-- Tomorrow Section -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            <div class="date-label">Tomorrow, Monday Nov 17</div>
+          </div>
           <div class="date-indicators">
             <div class="indicator-dot tasks"></div>
           </div>
         </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Tuesday Section - Compact -->
-      <div class="date-section">
-        <div class="date-header">
-          <div class="date-label">Tuesday, Nov 18</div>
-        </div>
-
-        <div class="date-row-compact">
-          <div class="date-label">Daily tasks & note</div>
+      <!-- Tuesday Section -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            <div class="date-label">Tuesday, Nov 18</div>
+          </div>
           <div class="date-indicators">
             <div class="indicator-dot tasks"></div>
             <div class="indicator-dot note"></div>
           </div>
         </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Next Weigh-In -->
-      <div class="date-section">
-        <div class="date-header">
-          <div class="date-label">Saturday, Nov 23</div>
-        </div>
-
-        <div class="date-row-compact">
-          <div class="date-label">Daily tasks & weigh-in</div>
+      <!-- Saturday Section -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            <div class="date-label">Saturday, Nov 23</div>
+          </div>
           <div class="date-indicators">
             <div class="indicator-dot tasks"></div>
             <div class="indicator-dot weigh"></div>
           </div>
         </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox disabled"></div>
+            <div class="task-main">
+              <div class="task-header-row">
+                <div class="task-title">Weekly Weigh-In</div>
+                <button class="task-action-button">Enter</button>
+              </div>
+              <div class="task-description">Record your weight</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Coaching Session -->
-      <div class="date-section">
-        <div class="date-header">
-          <div class="date-label">Monday, Nov 25</div>
-        </div>
-
-        <div class="date-row-compact">
-          <div class="date-label">Daily tasks & coaching session</div>
+      <!-- Monday Nov 25 Section -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            <div class="date-label">Monday, Nov 25</div>
+          </div>
           <div class="date-indicators">
             <div class="indicator-dot tasks"></div>
             <div class="indicator-dot coaching"></div>
           </div>
         </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Coaching Session</div>
+              <div class="task-description">10:00 AM - Video call with your coach</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Example with multiple special items -->
-      <div class="date-section">
-        <div class="date-header">
-          <div class="date-label">Friday, Nov 29</div>
-        </div>
-
-        <div class="date-row-compact">
-          <div class="date-label">Daily tasks, weigh-in & note</div>
+      <!-- Friday Nov 29 Section -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            <div class="date-label">Friday, Nov 29</div>
+          </div>
           <div class="date-indicators">
             <div class="indicator-dot tasks"></div>
             <div class="indicator-dot weigh"></div>
             <div class="indicator-dot note"></div>
           </div>
         </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox disabled"></div>
+            <div class="task-main">
+              <div class="task-header-row">
+                <div class="task-title">Weekly Weigh-In</div>
+                <button class="task-action-button">Enter</button>
+              </div>
+              <div class="task-description">Record your weight</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- December Coaching Session -->
-      <div class="date-section">
-        <div class="date-header">
-          <div class="date-label">Monday, Dec 2</div>
-        </div>
-
-        <div class="date-row-compact">
-          <div class="date-label">Daily tasks & coaching session</div>
+      <!-- Monday Dec 2 Section -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            <div class="date-label">Monday, Dec 2</div>
+          </div>
           <div class="date-indicators">
             <div class="indicator-dot tasks"></div>
             <div class="indicator-dot coaching"></div>
           </div>
         </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Coaching Session</div>
+              <div class="task-description">10:00 AM - Video call with your coach</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate Less Than 30 Grams of Net Carbohydrates</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Ate 120 Grams of Protein</div>
+            </div>
+          </div>
+
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Followed The Nutrition Plan's Food List</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Physician Consultation -->
-      <div class="date-section">
-        <div class="date-header">
-          <div class="date-label">Thursday, Dec 12</div>
-        </div>
-
-        <div class="date-row-compact">
-          <div class="date-label">Physician consultation</div>
+      <!-- Thursday Dec 12 Section -->
+      <div class="date-section collapsed">
+        <div class="date-header" onclick="toggleDateSection(this)">
+          <div class="date-header-left">
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            <div class="date-label">Thursday, Dec 12</div>
+          </div>
           <div class="date-indicators">
             <div class="indicator-dot coaching"></div>
+          </div>
+        </div>
+
+        <div class="task-cards-container">
+          <div class="task-card">
+            <div class="task-checkbox"></div>
+            <div class="task-main">
+              <div class="task-title">Physician Consultation</div>
+              <div class="task-description">2:00 PM - Video call with Dr. Smith</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1546,6 +1779,12 @@
       if (detail) {
         detail.classList.toggle('expanded');
       }
+    }
+
+    // Date section collapse/expand
+    function toggleDateSection(header) {
+      const section = header.closest('.date-section');
+      section.classList.toggle('collapsed');
     }
 
     // Filter functionality
