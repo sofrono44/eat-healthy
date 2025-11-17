@@ -136,8 +136,8 @@
     }
 
     .header-title {
-      font-size: 24px;
-      font-weight: 600;
+      font-size: 28px;
+      font-weight: 700;
       letter-spacing: -0.01em;
     }
 
@@ -172,12 +172,12 @@
     }
 
     .filter-pill {
-      padding: 6px 14px;
-      border-radius: 16px;
+      padding: 8px 18px;
+      border-radius: 18px;
       background: rgba(255, 255, 255, 0.2);
       color: white;
-      font-size: 13px;
-      font-weight: 500;
+      font-size: 15px;
+      font-weight: 600;
       border: none;
       white-space: nowrap;
       cursor: pointer;
@@ -258,7 +258,7 @@
     .reminder-banner {
       margin: 16px;
       padding: 14px 16px;
-      background: linear-gradient(135deg, #FFE9A3 0%, #FFD64B 100%);
+      background: #FFE9A3;
       border-radius: 12px;
       color: #2C3E50;
       box-shadow: var(--shadow-2);
@@ -568,12 +568,11 @@
       color: var(--color-gray-medium);
       flex-shrink: 0;
       transition: transform 200ms ease;
-      margin-top: 1px;
+      transform: rotate(-90deg);
     }
 
-    .task-card .task-detail:not(.expanded) ~ .task-header-row .task-chevron,
-    .task-card:not(:has(.task-detail.expanded)) .task-chevron {
-      transform: rotate(-90deg);
+    .task-card:has(.task-detail.expanded) .task-chevron {
+      transform: rotate(0deg);
     }
 
     .task-title {
@@ -924,12 +923,12 @@
       max-height: 0;
       overflow: hidden;
       transition: max-height 300ms ease;
-      padding: 0 16px;
+      padding: 0 12px;
     }
 
     .task-detail.expanded {
       max-height: 300px;
-      padding: 12px 16px 0;
+      padding: 12px 12px 0;
       border-top: 1px solid var(--color-gray-border);
       margin-top: 12px;
     }
@@ -975,11 +974,12 @@
 
     .progress-goal-notch {
       position: absolute;
-      top: -2px;
-      width: 2px;
-      height: 12px;
-      background: var(--color-charcoal);
-      border-radius: 1px;
+      top: 0;
+      width: 3px;
+      height: 8px;
+      background: #000000;
+      z-index: 10;
+      pointer-events: none;
     }
 
     /* Biomarker items */
@@ -1427,7 +1427,7 @@
         </svg>
       </div>
       <div class="reminder-content">
-        <div class="reminder-text">Reminder - labs due in 11 days</div>
+        <div class="reminder-text">Reminder: labs due in 4 days</div>
       </div>
       <button class="reminder-dismiss" onclick="dismissReminder()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -1457,12 +1457,13 @@
         <div class="task-cards-container">
         <!-- Record Biomarkers -->
         <div class="task-card" onclick="toggleTaskDetail(this)">
+          <div class="task-checkbox" onclick="event.stopPropagation(); toggleTask(this)"></div>
           <div class="task-main">
             <div class="task-header-row">
+              <div class="task-title">Record Biomarkers</div>
               <svg class="task-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
-              <div class="task-title">Record Biomarkers</div>
             </div>
             <div class="task-detail">
               <div class="biomarker-item">
@@ -1487,17 +1488,17 @@
               </div>
             </div>
           </div>
-          <div class="task-checkbox" onclick="event.stopPropagation(); toggleTask(this)"></div>
         </div>
 
         <!-- Nutrition Goals -->
         <div class="task-card" onclick="toggleTaskDetail(this)">
+          <div class="task-checkbox" onclick="event.stopPropagation(); toggleTask(this)"></div>
           <div class="task-main">
             <div class="task-header-row">
+              <div class="task-title">Log Food</div>
               <svg class="task-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
-              <div class="task-title">Log Food</div>
             </div>
             <div class="task-detail">
               <div class="detail-progress">
@@ -1507,7 +1508,7 @@
                 </div>
                 <div class="progress-bar-container">
                   <div class="progress-bar" style="width: 70.8%; background: var(--color-turquoise);"></div>
-                  <div class="progress-goal-notch" style="left: 100%;"></div>
+                  <div class="progress-goal-notch" style="right: 7px;"></div>
                 </div>
               </div>
               <div class="detail-progress" style="margin-top: 12px;">
@@ -1517,12 +1518,11 @@
                 </div>
                 <div class="progress-bar-container">
                   <div class="progress-bar" style="width: 60%; background: var(--color-turquoise);"></div>
-                  <div class="progress-goal-notch" style="left: 100%;"></div>
+                  <div class="progress-goal-notch" style="right: 11px;"></div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="task-checkbox" onclick="event.stopPropagation(); toggleTask(this)"></div>
         </div>
         </div>
       </div>
@@ -1543,12 +1543,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1570,12 +1570,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1596,12 +1596,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1622,12 +1622,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1648,12 +1648,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1674,12 +1674,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1701,12 +1701,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1727,12 +1727,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1762,12 +1762,12 @@
           </div>
 
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1788,12 +1788,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1814,12 +1814,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1840,12 +1840,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1868,12 +1868,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1922,12 +1922,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1957,12 +1957,12 @@
           </div>
 
           <div class="task-card">
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
               </div>
             </div>
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
