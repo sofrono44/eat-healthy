@@ -764,7 +764,7 @@
       max-width: 375px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       background: white;
       border-top: 1px solid var(--color-gray-border);
       box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
@@ -1455,7 +1455,7 @@
             <div class="task-header-row">
               <div class="task-title">Shawn Baker Community Event</div>
             </div>
-            <a href="#" class="task-link" onclick="event.preventDefault();">Zoom meeting at 7 PM PST</a>
+            <a href="#" class="task-link" onclick="event.preventDefault();">Zoom meeting at 5 PM EST</a>
           </div>
         </div>
 
@@ -1495,12 +1495,20 @@
         </div>
 
         <!-- Nutrition Goals -->
-        <div class="task-card">
-          <div class="task-checkbox" onclick="toggleTask(this)"></div>
+        <div class="task-card" onclick="toggleTaskDetail(this)">
+          <div class="task-checkbox" onclick="event.stopPropagation(); toggleTask(this)"></div>
           <div class="task-main">
             <div class="task-header-row">
               <div class="task-title">Log Food</div>
-              <button class="task-action-button" onclick="event.stopPropagation(); showFoodLoggingMessage();">Add</button>
+              <svg class="task-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="task-detail">
+              <div class="biomarker-item">
+                <div class="biomarker-label">Add a meal</div>
+                <button class="task-action-button" onclick="event.stopPropagation(); showFoodLoggingMessage();">Add</button>
+              </div>
             </div>
           </div>
         </div>
@@ -2179,35 +2187,24 @@
         </div>
         <div class="nav-label">To Do</div>
       </button>
-      <button class="nav-item">
+      <button class="nav-item" onclick="openModal('comingSoonModal')">
         <div class="nav-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 6v6l4 2"/>
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
           </svg>
         </div>
-        <div class="nav-label">Nutrition</div>
+        <div class="nav-label">Health</div>
       </button>
-      <button class="nav-item">
-        <div class="nav-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="12" y1="20" x2="12" y2="10"/>
-            <line x1="18" y1="20" x2="18" y2="4"/>
-            <line x1="6" y1="20" x2="6" y2="16"/>
-          </svg>
-        </div>
-        <div class="nav-label">History</div>
-      </button>
-      <button class="nav-item">
+      <button class="nav-item" onclick="openModal('comingSoonModal')">
         <div class="nav-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
             <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
           </svg>
         </div>
-        <div class="nav-label">Resources</div>
+        <div class="nav-label">Learn</div>
       </button>
-      <button class="nav-item">
+      <button class="nav-item" onclick="openModal('comingSoonModal')">
         <div class="nav-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
