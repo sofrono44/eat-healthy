@@ -122,7 +122,7 @@
     .header {
       background: var(--color-turquoise);
       color: white;
-      padding: 8px 16px 12px;
+      padding: 16px 16px 12px;
       border-radius: 0 0 20px 20px;
       box-shadow: 0 4px 12px rgba(61, 182, 206, 0.15);
     }
@@ -130,9 +130,8 @@
     .header-top {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      min-height: 40px;
+      align-items: flex-start;
+      margin-bottom: 12px;
     }
 
     .header-title {
@@ -581,6 +580,18 @@
       color: var(--color-charcoal);
       line-height: 1.4;
       flex: 1;
+    }
+
+    .task-link {
+      font-size: 13px;
+      color: var(--color-turquoise);
+      text-decoration: none;
+      margin-top: 4px;
+      display: block;
+    }
+
+    .task-link:active {
+      opacity: 0.7;
     }
 
     .task-action-button {
@@ -1376,33 +1387,15 @@
 <body>
   <div class="mobile-frame">
     <!-- Status Bar -->
-    <div class="status-bar">
-      <span>10:00</span>
-      <div class="status-icons">
-        <div class="signal-bars">
-          <div class="signal-bar"></div>
-          <div class="signal-bar"></div>
-          <div class="signal-bar"></div>
-          <div class="signal-bar"></div>
-        </div>
-        <span>LTE</span>
-        <div class="battery-icon">
-          <div class="battery-body">
-            <div class="battery-level"></div>
-          </div>
-          <div class="battery-tip"></div>
-        </div>
-      </div>
-    </div>
-
     <!-- Header -->
     <div class="header">
       <div class="header-top">
         <h1 class="header-title">To Do</h1>
         <button class="menu-button">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="8" r="4"/>
-            <path d="M4 20c0-3.87 3.13-7 7-7h2c3.87 0 7 3.13 7 7"/>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
           </svg>
         </button>
       </div>
@@ -1427,7 +1420,7 @@
         </svg>
       </div>
       <div class="reminder-content">
-        <div class="reminder-text">Reminder: labs due in 4 days</div>
+        <div class="reminder-text">Reminder: Labs due in 4 days</div>
       </div>
       <button class="reminder-dismiss" onclick="dismissReminder()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -1455,6 +1448,17 @@
         </div>
 
         <div class="task-cards-container">
+        <!-- Shawn Baker Event -->
+        <div class="task-card">
+          <div class="task-checkbox" onclick="toggleTask(this)"></div>
+          <div class="task-main">
+            <div class="task-header-row">
+              <div class="task-title">Shawn Baker Community Event</div>
+            </div>
+            <a href="#" class="task-link" onclick="event.preventDefault();">Zoom meeting at 7 PM PST</a>
+          </div>
+        </div>
+
         <!-- Record Biomarkers -->
         <div class="task-card" onclick="toggleTaskDetail(this)">
           <div class="task-checkbox" onclick="event.stopPropagation(); toggleTask(this)"></div>
@@ -1491,36 +1495,12 @@
         </div>
 
         <!-- Nutrition Goals -->
-        <div class="task-card" onclick="toggleTaskDetail(this)">
-          <div class="task-checkbox" onclick="event.stopPropagation(); toggleTask(this)"></div>
+        <div class="task-card">
+          <div class="task-checkbox" onclick="toggleTask(this)"></div>
           <div class="task-main">
             <div class="task-header-row">
               <div class="task-title">Log Food</div>
-              <svg class="task-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </div>
-            <div class="task-detail">
-              <div class="detail-progress">
-                <div class="progress-header">
-                  <div class="progress-label">Protein: 85g / 120g</div>
-                  <button class="task-action-button compact" onclick="event.stopPropagation(); showFoodLoggingMessage();">Add</button>
-                </div>
-                <div class="progress-bar-container">
-                  <div class="progress-bar" style="width: 70.8%; background: var(--color-turquoise);"></div>
-                  <div class="progress-goal-notch" style="right: 7px;"></div>
-                </div>
-              </div>
-              <div class="detail-progress" style="margin-top: 12px;">
-                <div class="progress-header">
-                  <div class="progress-label">Carbs: 18g / 30g</div>
-                  <button class="task-action-button compact" onclick="event.stopPropagation(); showFoodLoggingMessage();">Add</button>
-                </div>
-                <div class="progress-bar-container">
-                  <div class="progress-bar" style="width: 60%; background: var(--color-turquoise);"></div>
-                  <div class="progress-goal-notch" style="right: 11px;"></div>
-                </div>
-              </div>
+              <button class="task-action-button" onclick="event.stopPropagation(); showFoodLoggingMessage();">Add</button>
             </div>
           </div>
         </div>
