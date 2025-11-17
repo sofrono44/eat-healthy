@@ -562,6 +562,20 @@
       margin-bottom: 4px;
     }
 
+    .task-chevron {
+      width: 18px;
+      height: 18px;
+      color: var(--color-gray-medium);
+      flex-shrink: 0;
+      transition: transform 200ms ease;
+      margin-top: 1px;
+    }
+
+    .task-card .task-detail:not(.expanded) ~ .task-header-row .task-chevron,
+    .task-card:not(:has(.task-detail.expanded)) .task-chevron {
+      transform: rotate(-90deg);
+    }
+
     .task-title {
       font-size: 15px;
       font-weight: 600;
@@ -1443,59 +1457,47 @@
         <div class="task-cards-container">
         <!-- Record Biomarkers -->
         <div class="task-card" onclick="toggleTaskDetail(this)">
-          <div class="task-checkbox" onclick="event.stopPropagation(); toggleTask(this)"></div>
           <div class="task-main">
             <div class="task-header-row">
+              <svg class="task-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
               <div class="task-title">Record Biomarkers</div>
-              <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
             </div>
             <div class="task-detail">
               <div class="biomarker-item">
                 <div class="biomarker-label">General Symptoms</div>
-                <div style="display: flex; gap: 8px;">
-                  <button class="task-action-button" onclick="event.stopPropagation(); openSymptomsModal()">Add</button>
-                  <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissBiomarkerItem(this)">×</button>
-                </div>
+                <button class="task-action-button" onclick="event.stopPropagation(); openSymptomsModal()">Add</button>
               </div>
               <div class="biomarker-item">
                 <div class="biomarker-label">Weight</div>
-                <div style="display: flex; gap: 8px;">
-                  <button class="task-action-button" onclick="event.stopPropagation(); openWeightInput()">Add</button>
-                  <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissBiomarkerItem(this)">×</button>
-                </div>
+                <button class="task-action-button" onclick="event.stopPropagation(); openWeightInput()">Add</button>
               </div>
               <div class="biomarker-item">
                 <div class="biomarker-label">Waist Circumference</div>
-                <div style="display: flex; gap: 8px;">
-                  <button class="task-action-button" onclick="event.stopPropagation(); openModal('waistModal')">Add</button>
-                  <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissBiomarkerItem(this)">×</button>
-                </div>
+                <button class="task-action-button" onclick="event.stopPropagation(); openModal('waistModal')">Add</button>
               </div>
               <div class="biomarker-item">
                 <div class="biomarker-label">Ketones</div>
-                <div style="display: flex; gap: 8px;">
-                  <button class="task-action-button" onclick="event.stopPropagation(); openModal('ketonesModal')">Add</button>
-                  <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissBiomarkerItem(this)">×</button>
-                </div>
+                <button class="task-action-button" onclick="event.stopPropagation(); openModal('ketonesModal')">Add</button>
               </div>
               <div class="biomarker-item">
                 <div class="biomarker-label">Blood Pressure/Heart Rate</div>
-                <div style="display: flex; gap: 8px;">
-                  <button class="task-action-button" onclick="event.stopPropagation(); openModal('bloodPressureModal')">Add</button>
-                  <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissBiomarkerItem(this)">×</button>
-                </div>
+                <button class="task-action-button" onclick="event.stopPropagation(); openModal('bloodPressureModal')">Add</button>
               </div>
             </div>
           </div>
+          <div class="task-checkbox" onclick="event.stopPropagation(); toggleTask(this)"></div>
         </div>
 
         <!-- Nutrition Goals -->
         <div class="task-card" onclick="toggleTaskDetail(this)">
-          <div class="task-checkbox" onclick="event.stopPropagation(); toggleTask(this)"></div>
           <div class="task-main">
             <div class="task-header-row">
+              <svg class="task-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
               <div class="task-title">Log Food</div>
-              <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
             </div>
             <div class="task-detail">
               <div class="detail-progress">
@@ -1520,6 +1522,7 @@
               </div>
             </div>
           </div>
+          <div class="task-checkbox" onclick="event.stopPropagation(); toggleTask(this)"></div>
         </div>
         </div>
       </div>
@@ -1540,13 +1543,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1568,13 +1570,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1595,13 +1596,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1622,13 +1622,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1649,13 +1648,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1676,13 +1674,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1704,13 +1701,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1731,13 +1727,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1767,13 +1762,12 @@
           </div>
 
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1794,13 +1788,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1821,13 +1814,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1848,13 +1840,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1877,13 +1868,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1932,13 +1922,12 @@
 
         <div class="task-cards-container">
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
@@ -1968,13 +1957,12 @@
           </div>
 
           <div class="task-card">
-            <div class="task-checkbox" onclick="toggleTask(this)"></div>
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">Log Food</div>
-                <button class="task-dismiss-button" onclick="event.stopPropagation(); dismissTask(this)">×</button>
               </div>
             </div>
+            <div class="task-checkbox" onclick="toggleTask(this)"></div>
           </div>
         </div>
       </div>
