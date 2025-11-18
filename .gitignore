@@ -8,3 +8,10 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Local folders
+.claude/
+Design/
+HTML Demos/
+Screen Shots/
+revero-demo-pages/
