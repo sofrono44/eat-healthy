@@ -1713,10 +1713,10 @@
   <div class="mobile-frame">
     <!-- Status Bar -->
     <!-- Header -->
-    <div class="header">
+    <div class="header" onclick="window.location.href='versions.html'" style="cursor: pointer;">
       <div class="header-top">
         <h1 class="header-title">To Do</h1>
-        <button class="menu-button" onclick="openProfileDrawer()">
+        <button class="menu-button" onclick="event.stopPropagation(); openProfileDrawer()">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
             <circle cx="12" cy="7" r="4"/>
@@ -1726,9 +1726,9 @@
 
       <!-- Filter Pills -->
       <div class="filter-pills">
-        <button class="filter-pill active" onclick="setFilter('nutrition')">Tasks</button>
-        <button class="filter-pill" onclick="openComingSoon()">Appointments</button>
-        <button class="filter-pill" onclick="setFilter('biomarkers')">Labs</button>
+        <button class="filter-pill active" onclick="event.stopPropagation(); setFilter('nutrition')">Tasks</button>
+        <button class="filter-pill" onclick="event.stopPropagation(); openComingSoon()">Appointments</button>
+        <button class="filter-pill" onclick="event.stopPropagation(); setFilter('biomarkers')">Labs</button>
       </div>
     </div>
 
