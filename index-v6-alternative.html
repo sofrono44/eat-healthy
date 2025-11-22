@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
-  <title>Health Plan - Version 5: Colorful Accents</title>
+  <title>Health Plan - Version 6: Alternative Color Scheme</title>
   <style>
     /* Reset and base styles */
     * {
@@ -14,37 +14,38 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-      background: #F7F8FA;
-      color: #2C3E50;
+      background: #FAFAFA;
+      color: #2B2D33;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    /* Color system - COLORFUL ACCENTS VERSION (Revero Pastels) */
+    /* Color system - ALTERNATIVE (Switchfin) */
     :root {
-      --color-turquoise: #3DB6CE;
-      --color-turquoise-light: #5ACFDD;
-      --color-turquoise-dark: #2A8A9E;
-      --color-charcoal: #2C3E50;
-      --color-gray-light: #F7F8FA;
-      --color-gray-medium: #6B7280;
-      --color-gray-border: #E5E7EB;
-      --color-success: #88CC66;
-      --color-success-light: #F5F9E8;
-      --color-warning: #5BC5D9;
-      --color-error: #EF8A8A;
-      --color-purple: #8B5FA0;
+      --color-turquoise: #FF715B;
+      --color-turquoise-light: #FFB1A4;
+      --color-turquoise-dark: #E75B47;
+      --color-charcoal: #2B2D33;
+      --color-gray-light: #F2F4F8;
+      --color-gray-medium: #5F6373;
+      --color-gray-border: #E5E8EF;
+      --color-success: #B1F4CF;
+      --color-success-light: #E8FCF4;
+      --color-warning: #A6D4FF;
+      --color-error: #FF715B;
+      --color-purple: #353646;
       --color-white: #FFFFFF;
 
-      /* Revero Pastel Accent Colors for colorful variation */
-      --pastel-cyan: #E8F8FB;      /* Light Cyan */
-      --pastel-mint: #F5F9E8;      /* Soft Mint Green */
-      --pastel-peach: #FFF5EB;     /* Soft Peach */
-      --pastel-yellow: #FFFAEB;    /* Soft Yellow */
+      /* Alternative color palette */
+      --alt-coral: #FFB1A4;
+      --alt-blue: #A6D4FF;
+      --alt-mint: #B1F4CF;
+      --alt-quartz: #353646;
+      --alt-card: #F2F4F8;
 
       /* Shadows */
-      --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
-      --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.06);
+      --shadow-1: 0 1px 3px rgba(53, 54, 70, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+      --shadow-2: 0 4px 12px rgba(53, 54, 70, 0.08), 0 2px 6px rgba(0, 0, 0, 0.06);
     }
 
     /* Mobile container */
@@ -324,22 +325,12 @@
       background: white;
       border-radius: 12px;
       padding: 12px 16px;
-      box-shadow: none;
+      box-shadow: var(--shadow-1);
       transition: background-color 200ms ease;
-      border-left: none;
     }
 
     .date-section:not(.collapsed) {
-      background: white;
-    }
-
-    /* All date sections are white - no colored backgrounds */
-    .date-section:nth-child(4n+1):not(.collapsed),
-    .date-section:nth-child(4n+2):not(.collapsed),
-    .date-section:nth-child(4n+3):not(.collapsed),
-    .date-section:nth-child(4n+4):not(.collapsed) {
-      background: white;
-      border-left: none;
+      background: linear-gradient(to bottom, rgba(61, 182, 206, 0.03) 0%, rgba(61, 182, 206, 0.01) 100%);
     }
 
     .date-section .date-header {
@@ -474,33 +465,12 @@
       border-radius: 12px;
       padding: 12px;
       margin-bottom: 10px;
-      box-shadow: none;
+      box-shadow: var(--shadow-1);
       border-left: 4px solid transparent;
       transition: all 200ms ease;
       display: flex;
       align-items: flex-start;
       gap: 12px;
-    }
-
-    /* Colorful Accents - Revero pastel backgrounds with no left borders */
-    .task-card:nth-child(4n+1) {
-      background: var(--pastel-cyan);
-      border-left: none;
-    }
-
-    .task-card:nth-child(4n+2) {
-      background: var(--pastel-mint);
-      border-left: none;
-    }
-
-    .task-card:nth-child(4n+3) {
-      background: var(--pastel-peach);
-      border-left: none;
-    }
-
-    .task-card:nth-child(4n+4) {
-      background: var(--pastel-yellow);
-      border-left: none;
     }
 
     .task-card:last-child {
@@ -527,23 +497,6 @@
       margin-top: 2px;
       cursor: pointer;
       transition: all 150ms ease;
-    }
-
-    /* Colorful Accents - Checkbox border colors matching card colors */
-    .task-card:nth-child(4n+1) .task-checkbox:not(.checked) {
-      border-color: var(--color-turquoise);
-    }
-
-    .task-card:nth-child(4n+2) .task-checkbox:not(.checked) {
-      border-color: var(--color-success);
-    }
-
-    .task-card:nth-child(4n+3) .task-checkbox:not(.checked) {
-      border-color: var(--color-purple);
-    }
-
-    .task-card:nth-child(4n+4) .task-checkbox:not(.checked) {
-      border-color: var(--color-warning);
     }
 
     .task-checkbox.checked {
@@ -733,22 +686,11 @@
     .task-badge.nutrition {
       background: var(--color-success-light);
       color: #5EA044;
-      border: 1px solid rgba(94, 160, 68, 0.2);
     }
 
     .task-badge.tracking {
       background: #E8F8FB;
       color: #2A8A9E;
-      border: 1px solid rgba(42, 138, 158, 0.2);
-    }
-
-    /* Colorful Accents - Pastel badge backgrounds */
-    .task-badge:nth-of-type(odd) {
-      background: var(--pastel-mint);
-    }
-
-    .task-badge:nth-of-type(even) {
-      background: var(--pastel-cyan);
     }
 
     .task-streak {
@@ -771,25 +713,8 @@
       background: var(--color-gray-border);
     }
 
-    /* Colorful Accents - Varied streak dot colors */
     .streak-dot.active {
       background: var(--color-success);
-    }
-
-    .streak-dot.active:nth-child(4n+1) {
-      background: var(--color-turquoise);
-    }
-
-    .streak-dot.active:nth-child(4n+2) {
-      background: var(--color-success);
-    }
-
-    .streak-dot.active:nth-child(4n+3) {
-      background: var(--color-purple);
-    }
-
-    .streak-dot.active:nth-child(4n+4) {
-      background: var(--color-warning);
     }
 
     /* Biomarker entry card */
@@ -802,18 +727,6 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      border-left: 3px solid transparent;
-    }
-
-    /* Colorful Accents - Biomarker card with pastel gradients */
-    .biomarker-card:nth-child(odd) {
-      border-left-color: var(--color-turquoise);
-      background: linear-gradient(to right, var(--pastel-cyan) 0%, white 30%);
-    }
-
-    .biomarker-card:nth-child(even) {
-      border-left-color: var(--color-purple);
-      background: linear-gradient(to right, var(--pastel-peach) 0%, white 30%);
     }
 
     .biomarker-icon {
@@ -896,30 +809,8 @@
       background: transparent;
       color: var(--color-gray-medium);
       cursor: pointer;
-      transition: all 150ms ease;
+      transition: color 150ms ease;
       min-height: 64px;
-      position: relative;
-    }
-
-    /* Colorful Accents - Different pastel backgrounds for each nav item when active */
-    .nav-item:nth-child(1).active {
-      color: var(--color-turquoise);
-      background: var(--pastel-cyan);
-    }
-
-    .nav-item:nth-child(2).active {
-      color: var(--color-success);
-      background: var(--pastel-mint);
-    }
-
-    .nav-item:nth-child(3).active {
-      color: var(--color-purple);
-      background: var(--pastel-peach);
-    }
-
-    .nav-item:nth-child(4).active {
-      color: var(--color-warning);
-      background: var(--pastel-yellow);
     }
 
     .nav-item.active {
@@ -1864,7 +1755,6 @@
 
     <!-- Calendar List -->
     <div class="calendar-list" id="calendarList">
-
       <!-- Today Section -->
       <div class="date-section">
         <div class="date-header" onclick="toggleDateSection(this)">
@@ -2327,7 +2217,7 @@
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">3 Month Labs</div>
-                <button class="task-action-button" onclick="event.stopPropagation(); showComingSoon()">Schedule</button>
+                <button class="task-action-button">Schedule</button>
               </div>
               <div class="task-description">Complete your 3-month lab work</div>
             </div>
@@ -2441,7 +2331,7 @@
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">6 Month Labs</div>
-                <button class="task-action-button" onclick="event.stopPropagation(); showComingSoon()">Schedule</button>
+                <button class="task-action-button">Schedule</button>
               </div>
               <div class="task-description">Complete your 6-month lab work</div>
             </div>
@@ -2469,7 +2359,7 @@
             <div class="task-main">
               <div class="task-header-row">
                 <div class="task-title">12 Month Labs</div>
-                <button class="task-action-button" onclick="event.stopPropagation(); showComingSoon()">Schedule</button>
+                <button class="task-action-button">Schedule</button>
               </div>
               <div class="task-description">Complete your 12-month lab work</div>
             </div>

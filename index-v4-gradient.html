@@ -14,38 +14,109 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
+      background: #F0F9FB;
       color: #2C3E50;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    /* Color system - GRADIENT VERSION */
+    /* Color system - GRADIENT VERSION (Revero Pastel Gradients) */
     :root {
-      --color-turquoise: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --color-turquoise-light: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-      --color-turquoise-dark: #667eea;
+      --color-turquoise: #3DB6CE;
+      --color-turquoise-light: #5ACFDD;
+      --color-turquoise-dark: #2A8A9E;
       --color-charcoal: #2C3E50;
-      --color-gray-light: #FAFBFF;
+      --color-gray-light: #F7F8FA;
       --color-gray-medium: #6B7280;
       --color-gray-border: #E5E7EB;
-      --color-success: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-      --color-success-light: #F0FDF4;
-      --color-warning: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      --color-success: #88CC66;
+      --color-success-light: #F5F9E8;
+      --color-warning: #5BC5D9;
       --color-error: #EF8A8A;
-      --color-purple: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --color-purple: #8B5FA0;
       --color-white: #FFFFFF;
-      
-      /* Shadows */
-      --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
-      --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.06);
+
+      /* Flat solid colors - no gradients */
+      --flat-cyan: #E8F8FB;
+      --flat-mint: #F5F9E8;
+      --flat-peach: #FFF5EB;
+      --flat-yellow: #FFFAEB;
+
+      /* Shadows - 65% lighter */
+      --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.028), 0 1px 2px rgba(0, 0, 0, 0.021);
+      --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.028), 0 2px 6px rgba(0, 0, 0, 0.021);
+    }
+
+    /* FLAT VERSION - Solid pastel colors, no gradients */
+    .status-bar {
+      background: var(--color-turquoise) !important;
+      color: white !important;
+    }
+
+    .status-bar svg,
+    .status-icons {
+      color: white !important;
+    }
+
+    .header {
+      background: var(--color-turquoise) !important;
+      color: white !important;
+    }
+
+    .header-title,
+    .header-subtitle,
+    .profile-button {
+      color: white !important;
+    }
+
+    .profile-button svg {
+      color: white !important;
+    }
+
+    .task-card:nth-child(4n+1) {
+      background: var(--flat-cyan) !important;
+      border-left: 3px solid #3DB6CE;
+    }
+
+    .task-card:nth-child(4n+2) {
+      background: var(--flat-mint) !important;
+      border-left: 3px solid #88CC66;
+    }
+
+    .task-card:nth-child(4n+3) {
+      background: var(--flat-peach) !important;
+      border-left: 3px solid #8B5FA0;
+    }
+
+    .task-card:nth-child(4n+4) {
+      background: var(--flat-yellow) !important;
+      border-left: 3px solid #5BC5D9;
+    }
+
+    .date-section:not(.collapsed) {
+      background: var(--flat-cyan) !important;
+    }
+
+    .date-section:nth-child(even):not(.collapsed) {
+      background: var(--flat-mint) !important;
+    }
+
+    .nav-item.active {
+      background: var(--flat-peach) !important;
+    }
+
+    .biomarker-card {
+      background: var(--flat-yellow) !important;
+      border-left: 3px solid #3DB6CE;
+    }
+
+    .task-action-button {
+      background: var(--color-turquoise) !important;
+      border: none;
+    }
+
+    .date-badge {
+      background: var(--color-turquoise) !important;
     }
 
     /* Mobile container */

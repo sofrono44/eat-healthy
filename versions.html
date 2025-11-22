@@ -89,15 +89,19 @@
     }
 
     .version-card.multicolor::before {
-      background: linear-gradient(135deg, #FF6B9D 0%, #A855F7 100%);
+      background: linear-gradient(135deg, #B8E8F5 0%, #D5F0D8 33%, #FFE5D0 66%, #FFF0C8 100%);
     }
 
     .version-card.gradient::before {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background: linear-gradient(135deg, #E8F8FB 0%, #F5F9E8 50%, #FFF5EB 100%);
     }
 
     .version-card.colorful::before {
       background: linear-gradient(135deg, #3DB6CE 0%, #88CC66 50%, #8B5FA0 100%);
+    }
+
+    .version-card.alternative::before {
+      background: linear-gradient(135deg, #FF715B 0%, #FFB1A4 50%, #A6D4FF 100%);
     }
 
     .version-number {
@@ -144,17 +148,24 @@
     .version-card.vibrant .color-swatch:nth-child(2) { background: #00E676; }
     .version-card.vibrant .color-swatch:nth-child(3) { background: #B388FF; }
 
-    .version-card.multicolor .color-swatch:nth-child(1) { background: #FF6B9D; }
-    .version-card.multicolor .color-swatch:nth-child(2) { background: #00C896; }
-    .version-card.multicolor .color-swatch:nth-child(3) { background: #A855F7; }
+    .version-card.multicolor .color-swatch:nth-child(1) { background: #B8E8F5; }
+    .version-card.multicolor .color-swatch:nth-child(2) { background: #D5F0D8; }
+    .version-card.multicolor .color-swatch:nth-child(3) { background: #FFE5D0; }
+    .version-card.multicolor .color-swatch:nth-child(4) { background: #FFF0C8; }
 
-    .version-card.gradient .color-swatch:nth-child(1) { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-    .version-card.gradient .color-swatch:nth-child(2) { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
-    .version-card.gradient .color-swatch:nth-child(3) { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+    .version-card.gradient .color-swatch:nth-child(1) { background: linear-gradient(135deg, #E8F8FB 0%, #F5F9E8 100%); }
+    .version-card.gradient .color-swatch:nth-child(2) { background: linear-gradient(135deg, #F5F9E8 0%, #FFF5EB 100%); }
+    .version-card.gradient .color-swatch:nth-child(3) { background: linear-gradient(135deg, #FFF5EB 0%, #FFFAEB 100%); }
 
-    .version-card.colorful .color-swatch:nth-child(1) { background: #3DB6CE; }
-    .version-card.colorful .color-swatch:nth-child(2) { background: #88CC66; }
-    .version-card.colorful .color-swatch:nth-child(3) { background: #8B5FA0; }
+    .version-card.colorful .color-swatch:nth-child(1) { background: #E8F8FB; }
+    .version-card.colorful .color-swatch:nth-child(2) { background: #F5F9E8; }
+    .version-card.colorful .color-swatch:nth-child(3) { background: #FFF5EB; }
+    .version-card.colorful .color-swatch:nth-child(4) { background: #FFFAEB; }
+
+    .version-card.alternative .color-swatch:nth-child(1) { background: #FF715B; }
+    .version-card.alternative .color-swatch:nth-child(2) { background: #FFB1A4; }
+    .version-card.alternative .color-swatch:nth-child(3) { background: #A6D4FF; }
+    .version-card.alternative .color-swatch:nth-child(4) { background: #B1F4CF; }
 
     .badge {
       display: inline-block;
@@ -213,11 +224,12 @@
 
       <a href="index-v3-multicolor.html" class="version-card multicolor">
         <div class="version-number">Version 3</div>
-        <h2 class="version-name">Multi-Color</h2>
+        <h2 class="version-name">Multi-Color Pastels</h2>
         <p class="version-description">
-          Rich palette with pink, teal, and purple accents. Playful and modern approach with varied colors creating a dynamic, engaging interface.
+          All four Revero pastel colors used boldly throughout. Colorful gradient background with cyan, mint, peach, and yellow creating a vibrant, friendly interface.
         </p>
         <div class="color-preview">
+          <div class="color-swatch"></div>
           <div class="color-swatch"></div>
           <div class="color-swatch"></div>
           <div class="color-swatch"></div>
@@ -226,9 +238,9 @@
 
       <a href="index-v4-gradient.html" class="version-card gradient">
         <div class="version-number">Version 4</div>
-        <h2 class="version-name">Gradient</h2>
+        <h2 class="version-name">Pastel Gradients</h2>
         <p class="version-description">
-          Smooth color transitions with purple-to-blue gradients. Premium feel with animated background and flowing color combinations.
+          Smooth pastel-to-pastel color transitions using Revero palette. Animated gradient background with flowing color combinations for a dynamic, premium feel.
         </p>
         <div class="color-preview">
           <div class="color-swatch"></div>
@@ -238,13 +250,27 @@
       </a>
 
       <a href="index-v5-colorful.html" class="version-card colorful">
-        <span class="badge" style="background: #FEF3C7; color: #D97706;">Recommended</span>
         <div class="version-number">Version 5</div>
         <h2 class="version-name">Colorful Accents</h2>
         <p class="version-description">
           Original color palette strategically applied throughout the interface. Subtle color variations in task rows, navigation, badges, and sections for visual interest without overwhelming.
         </p>
         <div class="color-preview">
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+        </div>
+      </a>
+
+      <a href="index-v6-alternative.html" class="version-card alternative">
+        <div class="version-number">Version 6</div>
+        <h2 class="version-name">Alternative Color Scheme</h2>
+        <p class="version-description">
+          Warm, approachable fintech palette with coral CTAs, soft neutrals, and modern accent colors. Features Quartz Ink branding and Neo Mint AI indicators for a contemporary feel.
+        </p>
+        <div class="color-preview">
+          <div class="color-swatch"></div>
           <div class="color-swatch"></div>
           <div class="color-swatch"></div>
           <div class="color-swatch"></div>
