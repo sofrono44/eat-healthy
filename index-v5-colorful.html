@@ -1423,6 +1423,33 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
       background: var(--color-gray-light);
+      border-left: 4px solid transparent;
+    }
+
+    /* Colorful Accents - Menu section headers with colored left borders */
+    .menu-section:nth-child(1) .menu-section-header {
+      border-left-color: var(--color-turquoise);
+      background: linear-gradient(to right, var(--pastel-cyan) 0%, var(--color-gray-light) 100%);
+    }
+
+    .menu-section:nth-child(2) .menu-section-header {
+      border-left-color: var(--color-success);
+      background: linear-gradient(to right, var(--pastel-mint) 0%, var(--color-gray-light) 100%);
+    }
+
+    .menu-section:nth-child(3) .menu-section-header {
+      border-left-color: var(--color-purple);
+      background: linear-gradient(to right, var(--pastel-peach) 0%, var(--color-gray-light) 100%);
+    }
+
+    .menu-section:nth-child(4) .menu-section-header {
+      border-left-color: var(--color-warning);
+      background: linear-gradient(to right, var(--pastel-yellow) 0%, var(--color-gray-light) 100%);
+    }
+
+    .menu-section:nth-child(5) .menu-section-header {
+      border-left-color: var(--color-turquoise);
+      background: linear-gradient(to right, var(--pastel-cyan) 0%, var(--color-gray-light) 100%);
     }
 
     .menu-item {
@@ -1461,6 +1488,19 @@
       height: 20px;
       color: var(--color-turquoise);
       flex-shrink: 0;
+    }
+
+    /* Colorful Accents - Menu item icons match section colors */
+    .menu-section:nth-child(2) .menu-item-icon {
+      color: var(--color-success);
+    }
+
+    .menu-section:nth-child(3) .menu-item-icon {
+      color: var(--color-purple);
+    }
+
+    .menu-section:nth-child(4) .menu-item-icon {
+      color: var(--color-warning);
     }
 
     .menu-item.disabled .menu-item-icon {
@@ -1549,12 +1589,12 @@
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      background: var(--color-gray-light);
+      background: linear-gradient(135deg, var(--pastel-cyan) 0%, var(--pastel-mint) 50%, var(--pastel-peach) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 12px;
-      border: 3px solid var(--color-gray-border);
+      border: 3px solid var(--color-turquoise);
     }
 
     .profile-picture svg {
@@ -1598,6 +1638,31 @@
       transition: background 150ms ease;
     }
 
+    /* Colorful Accents - Profile info items with pastel backgrounds */
+    .profile-info-item:nth-child(6n+1) {
+      background: var(--pastel-cyan);
+    }
+
+    .profile-info-item:nth-child(6n+2) {
+      background: var(--pastel-mint);
+    }
+
+    .profile-info-item:nth-child(6n+3) {
+      background: var(--pastel-peach);
+    }
+
+    .profile-info-item:nth-child(6n+4) {
+      background: var(--pastel-yellow);
+    }
+
+    .profile-info-item:nth-child(6n+5) {
+      background: var(--pastel-cyan);
+    }
+
+    .profile-info-item:nth-child(6n+6) {
+      background: var(--pastel-mint);
+    }
+
     .profile-info-item:active {
       background: var(--color-gray-border);
     }
@@ -1626,6 +1691,31 @@
       color: var(--color-turquoise);
       flex-shrink: 0;
       opacity: 0.7;
+    }
+
+    /* Colorful Accents - Edit icons match their item colors */
+    .profile-info-item:nth-child(6n+1) .edit-icon {
+      color: var(--color-turquoise);
+    }
+
+    .profile-info-item:nth-child(6n+2) .edit-icon {
+      color: var(--color-success);
+    }
+
+    .profile-info-item:nth-child(6n+3) .edit-icon {
+      color: var(--color-purple);
+    }
+
+    .profile-info-item:nth-child(6n+4) .edit-icon {
+      color: var(--color-warning);
+    }
+
+    .profile-info-item:nth-child(6n+5) .edit-icon {
+      color: var(--color-turquoise);
+    }
+
+    .profile-info-item:nth-child(6n+6) .edit-icon {
+      color: var(--color-success);
     }
 
     .profile-info-item:active .edit-icon {
