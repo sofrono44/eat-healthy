@@ -1,0 +1,17 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local folders
+.claude/
+Design/
+HTML Demos/
+Screen Shots/
+revero-demo-pages/
