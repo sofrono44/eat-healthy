@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Plan Prototype - Version Selector</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+    }
+
+    .versions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 2rem;
+    }
+
+    .version-card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .version-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      transition: height 0.3s ease;
+    }
+
+    .version-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .version-card:hover::before {
+      height: 100%;
+      opacity: 0.1;
+    }
+
+    .version-card.original::before {
+      background: linear-gradient(135deg, #3DB6CE 0%, #2A8A9E 100%);
+    }
+
+    .version-card.vibrant::before {
+      background: linear-gradient(135deg, #00D4FF 0%, #00A8CC 100%);
+    }
+
+    .version-card.multicolor::before {
+      background: linear-gradient(135deg, #B8E8F5 0%, #D5F0D8 33%, #FFE5D0 66%, #FFF0C8 100%);
+    }
+
+    .version-card.gradient::before {
+      background: linear-gradient(135deg, #E8F8FB 0%, #F5F9E8 50%, #FFF5EB 100%);
+    }
+
+    .version-card.colorful::before {
+      background: linear-gradient(135deg, #3DB6CE 0%, #88CC66 50%, #8B5FA0 100%);
+    }
+
+    .version-card.alternative::before {
+      background: linear-gradient(135deg, #FF715B 0%, #FFB1A4 50%, #A6D4FF 100%);
+    }
+
+    .version-number {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      opacity: 0.6;
+    }
+
+    .version-name {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #2C3E50;
+    }
+
+    .version-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #6B7280;
+      margin-bottom: 1.5rem;
+    }
+
+    .color-preview {
+      display: flex;
+      gap: 8px;
+      margin-top: 1rem;
+    }
+
+    .color-swatch {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .version-card.original .color-swatch:nth-child(1) { background: #3DB6CE; }
+    .version-card.original .color-swatch:nth-child(2) { background: #88CC66; }
+    .version-card.original .color-swatch:nth-child(3) { background: #8B5FA0; }
+
+    .version-card.vibrant .color-swatch:nth-child(1) { background: #00D4FF; }
+    .version-card.vibrant .color-swatch:nth-child(2) { background: #00E676; }
+    .version-card.vibrant .color-swatch:nth-child(3) { background: #B388FF; }
+
+    .version-card.multicolor .color-swatch:nth-child(1) { background: #B8E8F5; }
+    .version-card.multicolor .color-swatch:nth-child(2) { background: #D5F0D8; }
+    .version-card.multicolor .color-swatch:nth-child(3) { background: #FFE5D0; }
+    .version-card.multicolor .color-swatch:nth-child(4) { background: #FFF0C8; }
+
+    .version-card.gradient .color-swatch:nth-child(1) { background: linear-gradient(135deg, #E8F8FB 0%, #F5F9E8 100%); }
+    .version-card.gradient .color-swatch:nth-child(2) { background: linear-gradient(135deg, #F5F9E8 0%, #FFF5EB 100%); }
+    .version-card.gradient .color-swatch:nth-child(3) { background: linear-gradient(135deg, #FFF5EB 0%, #FFFAEB 100%); }
+
+    .version-card.colorful .color-swatch:nth-child(1) { background: #E8F8FB; }
+    .version-card.colorful .color-swatch:nth-child(2) { background: #F5F9E8; }
+    .version-card.colorful .color-swatch:nth-child(3) { background: #FFF5EB; }
+    .version-card.colorful .color-swatch:nth-child(4) { background: #FFFAEB; }
+
+    .version-card.alternative .color-swatch:nth-child(1) { background: #FF715B; }
+    .version-card.alternative .color-swatch:nth-child(2) { background: #FFB1A4; }
+    .version-card.alternative .color-swatch:nth-child(3) { background: #A6D4FF; }
+    .version-card.alternative .color-swatch:nth-child(4) { background: #B1F4CF; }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #F0FDF4;
+      color: #059669;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .versions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Health Plan Prototype Versions</h1>
+    <p class="subtitle">Select a color scheme version to view</p>
+
+    <div class="versions-grid">
+      <a href="index-v5-colorful.html" class="version-card colorful">
+        <span class="badge">Current</span>
+        <div class="version-number">Version 5</div>
+        <h2 class="version-name">Colorful Accents</h2>
+        <p class="version-description">
+          Original color palette strategically applied throughout the interface. Subtle color variations in task rows, navigation, badges, and sections for visual interest without overwhelming.
+        </p>
+        <div class="color-preview">
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+        </div>
+      </a>
+
+      <a href="index-v1-foundation.html" class="version-card original">
+        <div class="version-number">Version 1</div>
+        <h2 class="version-name">Foundation</h2>
+        <p class="version-description">
+          Professional and clean design with balanced turquoise and neutral tones. The baseline version with proven readability and accessibility.
+        </p>
+        <div class="color-preview">
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+        </div>
+      </a>
+
+      <a href="index-v2-vibrant.html" class="version-card vibrant">
+        <div class="version-number">Version 2</div>
+        <h2 class="version-name">Vibrant</h2>
+        <p class="version-description">
+          Bold, highly saturated colors with bright cyan and neon accents. Eye-catching design that creates strong visual impact and energy.
+        </p>
+        <div class="color-preview">
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+        </div>
+      </a>
+
+      <a href="index-v3-multicolor.html" class="version-card multicolor">
+        <div class="version-number">Version 3</div>
+        <h2 class="version-name">Multi-Color Pastels</h2>
+        <p class="version-description">
+          All four Revero pastel colors used boldly throughout. Colorful gradient background with cyan, mint, peach, and yellow creating a vibrant, friendly interface.
+        </p>
+        <div class="color-preview">
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+        </div>
+      </a>
+
+      <a href="index-v4-gradient.html" class="version-card gradient">
+        <div class="version-number">Version 4</div>
+        <h2 class="version-name">Pastel Gradients</h2>
+        <p class="version-description">
+          Smooth pastel-to-pastel color transitions using Revero palette. Animated gradient background with flowing color combinations for a dynamic, premium feel.
+        </p>
+        <div class="color-preview">
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+        </div>
+      </a>
+
+      <a href="index-v6-alternative.html" class="version-card alternative">
+        <div class="version-number">Version 6</div>
+        <h2 class="version-name">Alternative Color Scheme</h2>
+        <p class="version-description">
+          Warm, approachable fintech palette with coral CTAs, soft neutrals, and modern accent colors. Features Quartz Ink branding and Neo Mint AI indicators for a contemporary feel.
+        </p>
+        <div class="color-preview">
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+          <div class="color-swatch"></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
